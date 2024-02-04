@@ -10,6 +10,11 @@ By encapsulating clinical relevance, genetic implications, ACMG classification, 
 
 Overall, this dashboard thrives on collaboration, by allowing researchers and clinicians to seamlessly share and collaborate on reports, fostering knowledge exchange and enriching the collective understanding of rare diseases. In essence, RareInsight is poised to redefine rare disease diagnosis and research by inviting collaboration and innovation to enhance healthcare outcomes in an open-source format.
 
+
+# Basic Workflow
+![rareinsight_workflow](https://github.com/omicscodeathon/rareinsight/assets/78590097/86cf4299-3b0e-467e-9c46-99d8229a6d92)
+
+
 # Contributors
 - **Kimberly Christine Coetzer:** Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa
 - **Olaitan I Awe:** ASBCB, Cape Town, South Africa
