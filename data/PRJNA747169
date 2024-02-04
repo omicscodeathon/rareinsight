@@ -1,10 +1,28 @@
-#The data used in the research was obtained from the ENA browser (European Nucleotide Archive)
-#Project: PRJNA747169
-#Whole exome sequencing analysis in fetal skeletal dysplasia detected by ultrasonography: an analysis of 38 cases
-#Secondary Study Accession:SRP328663
-#Study Title:WES in fetal skeletal dysplasia
-#Center Name:BerryGenomics
-#ENA-REFSEQ:N
-#PROJECT-ID:747169
-#ENA-FIRST-PUBLIC:2021-09-01
-#ENA-LAST-UPDATE:2023-05-19
+# Research Data Overview
+
+## Data Source
+The data used in the research was obtained from the ENA browser (European Nucleotide Archive).
+
+## Project Information
+- Project: PRJNA747169
+- Whole Exome Sequencing Analysis in Fetal Skeletal Dysplasia Detected by Ultrasonography: An Analysis of 38 Cases
+- Secondary Study Accession: SRP328663
+- Study Title: WES in Fetal Skeletal Dysplasia
+- Center Name: BerryGenomics
+- ENA-REFSEQ: N
+- PROJECT-ID: 747169
+- ENA-FIRST-PUBLIC: 2021-09-01
+- ENA-LAST-UPDATE: 2023-05-19
+
+## Associated Publication
+### Title
+Whole Exome Sequencing Analysis in Fetal Skeletal Dysplasia Detected by Ultrasonography: An Analysis of 38 Cases.
+
+### Authors
+Peng Y, Yang S, Huang X, Pang J, Liu J, Hu J, Shen X, Tang C, Wang H.
+
+### Affiliation
+Prenatal Diagnosis Center, National Health Commission Key Laboratory of Birth Defects Research, Hunan Provincial Maternal and Child Health Care Hospital, Changsha, China.
+
+### Journal
+Front Genet 12728544 (2021)
