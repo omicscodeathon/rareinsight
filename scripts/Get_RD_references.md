@@ -6,6 +6,7 @@ unzip master.zip
 
 # igenomes GRCh38
 https://s3.amazonaws.com/igenomes.illumina.com/Homo_sapiens/NCBI/GRCh38/Homo_sapiens_NCBI_GRCh38.tar.gz
+
 tar xf Homo_sapiens_NCBI_GRCh38.tar.gz
 
 # ExpansionHunter / Stranger catalogue file
@@ -13,6 +14,7 @@ https://raw.githubusercontent.com/Clinical-Genomics/stranger/master/stranger/res
 
 # VEP cache (v107)
 https://ftp.ensembl.org/pub/release-107/variation/indexed_vep_cache/homo_sapiens_merged_vep_107_GRCh38.tar.gz
+
 tar xf homo_sapiens_merged_vep_107_GRCh38.tar.gz
 
 # VEP plugins (v107)
@@ -25,13 +27,14 @@ bash install-vep-plugins.sh
 
 Place these in vep_cache dir. The vep config ext.args is defined in the workflow repo <raredisease>/conf/modules/annotate_snvs.config. The override in medGenConfigs/process-overrides.conf sets the following paths.
 
-beb5b6e3adbe45abfe3aaf2d9776f932  spliceai_scores.raw.indel.hg38.vcf.gz
-ef01ec815c35ce32adc3d65cab62df67  spliceai_scores.raw.indel.hg38.vcf.gz.tbi
-b3ac9315317e6bea43fb8dd5797fcba4  spliceai_scores.raw.snv.hg38.vcf.gz
-cb7b1b692961fe148aab87dcee823d84  spliceai_scores.raw.snv.hg38.vcf.gz.tbi
+spliceai_scores.raw.indel.hg38.vcf.gz
+spliceai_scores.raw.indel.hg38.vcf.gz.tbi
+spliceai_scores.raw.snv.hg38.vcf.gz
+spliceai_scores.raw.snv.hg38.vcf.gz.tbi
 
 # Intervals files
 Create bed files and interval_lists from genome dict file using the following script:
+
 bash create-bed-and-intervals.sh
 
 
@@ -44,6 +47,7 @@ https://github.com/Clinical-Genomics/reference-files/blob/master/rare-disease/ra
 
 # Clinvar
 https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz
+
 https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/clinvar.vcf.gz.tbi
 
 
@@ -63,6 +67,7 @@ tar xf annotationsGRCh38_v1.6.tar.gz
 
 # SNVs
 https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz (81GB)
+
 https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz.tbi
 
 # Create new index for SNVs
@@ -81,6 +86,7 @@ and
 https://storage.googleapis.com/gcp-public-data--gnomad/release/3.1/vcf/genomes/gnomad.genomes.v3.1.sites.chrM.vcf.bgz.tbi
 
 https://gnomad.broadinstitute.org/downloads#v3
+
 The script make-gnomad-af-file.sh creates a combined VCF file
   
 # gnomAD tab file
@@ -89,6 +95,7 @@ bash convert-gnomad-to-tsv.sh
 
 # gnomAD SV
 https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz
-https://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz.tbi
+
+ttps://ftp.ncbi.nlm.nih.gov/pub/dbVar/data/Homo_sapiens/by_study/vcf/nstd166.GRCh38.variant_call.vcf.gz.tbi
 
 
