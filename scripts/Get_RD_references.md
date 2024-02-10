@@ -58,6 +58,7 @@ cp -b scripts/doctored-annotate_snvs.nf ~/nf-core-raredisease_1.1.1/1_1_1/subwor
 
 # Indels
 https://krishna.gs.washington.edu/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz (205GB)
+
 tar xf annotationsGRCh38_v1.6.tar.gz
 
 # SNVs
