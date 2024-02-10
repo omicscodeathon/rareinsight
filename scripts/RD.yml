@@ -1,0 +1,22 @@
+input: samplesheet.csv
+genome: GRCh38
+outdir: /path/to/directory/output/
+fasta: /path/to/file/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa
+gnomad_af: /path/to/file/gnomad_reformated.tab.gz
+intervals_wgs: /path/to/file/intervals/wgs.interval_list
+intervals_y: /path/to/file/intervals/chrY.interval_list
+variant_catalog: /path/to/file/variant_catalog_grch38.json
+vcfanno_resources: /path/to/file/vcfanno_resources.txt
+vcfanno_toml: /path/to/file/vcfanno_config.toml
+vcfanno_lua: /path/to/file/vcfanno_functions.lua
+vep_cache: /path/to/file/vep_cache_and_plugins/
+vep_cache_version: 107
+score_config_snv: /path/to/file/rank_model_-v1.36-.ini
+svdb_query_dbs: /path/to/file/svdb_querydb_files.csv
+score_config_sv: /path/to/file/svrank_model_-v1.11-.ini
+target_bed: /path/to/file/intervals/wgs.bed
+analysis_type: wes
+skip_cnv_calling: true
+skip_mt_analysis: true
+rmdup: true
+
