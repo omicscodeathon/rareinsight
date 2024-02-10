@@ -1,6 +1,6 @@
 # RareDisease Reference files
 
-# Get GitHub repository
+# Get GitHub repository (Thank you Marius Bjørnstad for this resource!)
 https://github.com/fa2k/raredisease-configs/archive/refs/heads/main.zip
 unzip master.zip
 
