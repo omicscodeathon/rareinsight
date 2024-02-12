@@ -19,8 +19,8 @@ ui <-fluidPage(
     sidebarMenu(
       menuItem("Home ", tabName = "home", icon = icon("home")),
       menuItem("About us", tabName = "Abt_us", icon = icon("users")),
-      menuItem("Services", tabName = "service", icon = icon("bar-chart")),
-       menuSubItem("under Service", tabName = "tab1",icon = icon("glyphicon glyphicon-stats" )),
+      menuItem("Services", tabName = "service", icon = icon("bar-chart"),
+       menuSubItem("kimberly-merge", tabName = "tab1",icon = icon("glyphicon glyphicon-stats" ))),
       menuItem("Acknowledgement", tabName = "acknow", icon = icon("handshake"))
       
     )
