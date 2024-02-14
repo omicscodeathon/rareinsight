@@ -13,10 +13,13 @@ ui <- fluidPage(
         menuItem("Home ", tabName = "home", icon = icon("home")),
         menuItem("About us", tabName = "Abt_us", icon = icon("users")),
         menuItem("Services", tabName = "service", icon = icon("bar-chart"),
-                 menuSubItem("kimberly-merged", tabName = "kim",icon = icon("glyphicon glyphicon-stats" ))),
-        menuItem("Acknowledgement", tabName = "acknow", icon = icon("handshake"))
-      ),
-      fileInput("input_file", "Upload VCF File", accept = c(".vcf.gz"))  # Added file input
+                 menuSubItem("Search Panel",
+                             tabName = "Search",
+                             icon = icon("glyphicon glyphicon-stats" )),
+                 menuSubItem("Vcf Panel",tabName = "vcfpanel",icon = icon("file")) 
+        ),
+      menuItem("Acknowledgement", tabName = "acknow", icon = icon("handshake"))
+      )
     ),
 
     dashboardBody(
@@ -74,7 +77,7 @@ ui <- fluidPage(
         ),
 
         tabItem(
-          tabName = "kim",
+          tabName = "Search",
           h1("Search Panel"),
           tabBox(
             width = 6,
@@ -93,23 +96,31 @@ ui <- fluidPage(
             tabPanel("Disorder", "Clinical information will be displayed here")
           )
         ),
+        tabItem(tabName = "vcfpanel",
+                h1("VCF Panel"),
+                
+                # Added file input
+                fileInput("input_file", "Upload VCF File", accept = c(".vcf.gz")),
+                fluidRow(
+                  box(
+                    title = "Variant Information",
+                    solidHeader = TRUE,
+                    status = "primary",
+                    div(style = "overflow-x: scroll; width: 100%;",
+                        tableOutput("variant_table")
+                    )
+                  )
+                )
+          
+        ),
 
         tabItem(
           tabName = "acknow",
           h1("Acknowledgement part for omics codeathon universities & contribution")
         )
-      ),
-
-      fluidRow(
-        box(
-          title = "Variant Information",
-          solidHeader = TRUE,
-          status = "primary",
-          div(style = "overflow-x: scroll; width: 100%;",
-              tableOutput("variant_table")
-          )
-        )
       )
+
+      
     )
   )
 )
