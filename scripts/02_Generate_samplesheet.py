@@ -1,6 +1,6 @@
 import os
 import csv
-
+ 
 def collect_paired_reads(directory):
     # List all files in the directory
     files = os.listdir(directory)
