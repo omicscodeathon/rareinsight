@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 # Directory for downladed reads
 mkdir -p Reads
 
