@@ -3,19 +3,22 @@ library(shinydashboard)
 library(vcfR)
 library(DT)  # For interactive tables
 
+
 ui <- fluidPage( 
     dashboardPage(
    # skin = "purple",
-    dashboardHeader(title = "RareInsight"),
-   
+    dashboardHeader(title = span(img(src = "logo.png", height = 50), "RareInsight")),
+    
 
     dashboardSidebar(
       sidebarMenu(
         menuItem("Home ", tabName = "home", icon = icon("home")),
         menuItem("About us", tabName = "Abt_us", icon = icon("users")),
         menuItem("Services", tabName = "service", icon = icon("bar-chart"),
+                 menuSubItem("Input User Information", tabName = "input_user_info", icon = icon("user-circle")),
                  menuSubItem("Search Panel",tabName = "Search", icon = icon("glyphicon glyphicon-stats" )),
-                 menuSubItem("Vcf Panel",tabName = "vcfpanel",icon = icon("file"))
+                 menuSubItem("Vcf Panel",tabName = "vcfpanel",icon = icon("file")),
+                 menuSubItem("Diagnostic report", tabName = "diagnostic_report", icon = icon("line-chart"))
         ),
       menuItem("Acknowledgement", tabName = "acknow", icon = icon("handshake"))
       )
@@ -109,6 +112,20 @@ ui <- fluidPage(
           tabName = "service",
           h1("User Data Inputs")
         ),
+        tabItem(
+          tabName = "input_user_info",
+          h1(" User Data Inputs"),
+          fluidRow(
+            column(6, textInput(inputId = "name", label = "Name")),
+            column(6, textInput(inputId = "surname", label = "Surname")),
+            column(6, textInput(inputId = "ethnicity", label = "Ethnicity")),
+            column(6, dateInput(inputId = "dob", label = "Date of Birth")),
+            column(12, textInput(inputId = "clinical_diagnosis", label = "Clinical Diagnosis (OMIM")),
+            column(12, textInput(inputId = "phenotype", label = "Phenotype (HPO Terms)")),
+            column(12, selectInput(inputId = "rest_performed", label = "Test Performed", choices = c("WES", "WGS", "Gene Panel"))),
+            downloadButton(outputId = "download_button", label = "Download User Info")
+          )
+        ),
 
         tabItem(
           tabName = "Search",
@@ -134,32 +151,65 @@ ui <- fluidPage(
                 # Added file input
                 fileInput("input_file", "Upload VCF File", accept = c(".vcf.gz")),
                 fluidRow(
-                  box(
+                  wellPanel(
                     title = "Variant Information",
                     solidHeader = TRUE,
                     status = "primary",
                     div(style = "overflow-x: scroll; width: 100%;",
-                        tableOutput("variant_table")
+                       tableOutput("variant_table")
                     )
                   )
                 )
           
         ),
+        
+        tabItem(
+          tabName = "diagnostic_report",
+          tabPanel("Clinician and Researcher Support", "Clinician and researcher support information will be displayed here"),
+          tabPanel("Patient Support", "Patient support information will be displayed here"),
+          tabPanel("ACMG Classification", "ACMG classification information will be displayed here"),
+          tabPanel("Disorder", "Clinical information will be displayed here")
+        ),
 
         tabItem(
           tabName = "acknow",
-          h1("Acknowledgement part for omics codeathon universities & contribution")
-        )
-      )
-
-      
+          h1("Thank you to the following people and organizations:"),
+          h4("African Society for Bioinformatics and Computational Biology",
+             img(src = "asbcb-logo.png", height = 50, width = 50))
+         )
+       )
     )
   )
 )
-
 variant_summary <- read.delim("variant_summary.txt", stringsAsFactors = FALSE)
 
 server <- function(input, output, session) {
+  ###########################  ########################### 
+  ## user input part : 
+   user_info_text <- reactive({
+    paste(
+      "Name: ", input$name,"\n",
+      "Surname: ", input$surname,"\n",
+      "Ethnicity: ", input$ethnicity,"\n",
+      "Date of Birth: ", input$dob,"\n",
+      "Clinical Diagnosis (OMIM): ", input$clinical_diagnosis,"\n",
+      "Phenotype (HPO Terms): ", input$phenotype,"\n",
+      "Test Performed: ", input$rest_performed,"\n"
+    )
+  })
+  
+  # Function to generate downloadable user info content
+  output$download_button <- downloadHandler(
+    filename = function() {
+      paste("user_info_", Sys.Date(), ".txt", sep = "")
+    },
+    content = function(file) {
+      writeLines(user_info_text(), file)
+    }
+  )
+  ###########################  ###########################   
+  ### Search Panel part
+  
   observeEvent(input$search_button, {
     search_term <- input$search_input
     search_type <- input$search_type
@@ -181,18 +231,57 @@ server <- function(input, output, session) {
       }
     })
   })
+  ###########################  ########################### 
+  ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
     vcf_file <- input$input_file$datapath
     vcf_data <- read.vcfR(vcf_file)
     return(vcf_data)
   })
-
+  
   output$variant_table <- renderTable({
     req(vcf_data())
+    
+    # Extract variant information and filter PASS variants
     variant_info <- as.data.frame(vcf_data()@fix)
+    ############ variant_info <- variant_info[variant_info$FILTER == "PASS", ]
+    
+    # Remove ID and QUAL columns
+    ############ variant_info <- subset(variant_info, select = -c(ID, QUAL))
+    
+    # Split INFO column into separate columns
+    info_split <- strsplit(as.character(variant_info$INFO), ";")
+    max_splits <- max(lengths(info_split))
+    
+    # Create dataframe to store split columns
+    info_df <- data.frame(matrix(NA, ncol = max_splits, nrow = nrow(variant_info)))
+    
+    # Extract column names and values from INFO column
+    info_names_values <- lapply(info_split, function(x) {
+      splits <- strsplit(x, "=")
+      names <- sapply(splits, `[`, 1)
+      values <- sapply(splits, `[`, 2)
+      return(list(names = names, values = values))
+    })
+    
+    # Fill in split columns with appropriate column names
+    for (i in 1:max_splits) {
+      column_values <- sapply(info_names_values, function(info) ifelse(length(info$values) >= i, info$values[i], NA))
+      col_names <- unique(unlist(sapply(info_names_values, function(info) ifelse(length(info$names) >= i, info$names[i], NA))))
+      colnames(info_df)[i] <- col_names
+      info_df[, i] <- column_values
+    }
+    
+    # Combine split INFO columns with original dataframe
+    variant_info <- cbind(variant_info, info_df)
+    
+    # Remove original INFO column
+    variant_info <- subset(variant_info, select = -INFO)
+    
     return(variant_info)
   })
 }
+
 
 shinyApp(ui, server)
