@@ -242,13 +242,18 @@ server <- function(input, output, session) {
   
   output$variant_table <- renderTable({
     req(vcf_data())
-    
+  
     # Extract variant information and filter PASS variants
     variant_info <- as.data.frame(vcf_data()@fix)
     ############ variant_info <- variant_info[variant_info$FILTER == "PASS", ]
-    
+
     # Remove ID and QUAL columns
     ############ variant_info <- subset(variant_info, select = -c(ID, QUAL))
+    
+    # Remobe ID is not Abvailable "NA"
+    if (any(is.na(variant_info$ID))) {
+      variant_info <- subset(variant_info, select = -c(ID))
+    }
     
     # Split INFO column into separate columns
     info_split <- strsplit(as.character(variant_info$INFO), ";")
