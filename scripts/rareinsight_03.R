@@ -145,23 +145,32 @@ ui <- fluidPage(
             )
           
         ),
-        tabItem(tabName = "vcfpanel",
-                h1("VCF Panel"),
-                
-                # Added file input
-                fileInput("input_file", "Upload VCF File", accept = c(".vcf.gz")),
-                fluidRow(
-                  wellPanel(
-                    title = "Variant Information",
-                    solidHeader = TRUE,
-                    status = "primary",
-                    div(style = "overflow-x: scroll; width: 100%;",
-                       tableOutput("variant_table")
-                    )
-                  )
-                )
-          
-        ),
+        tabItem(
+          tabName = "vcfpanel",
+           h1("VCF Panel"),
+           # Added file input
+           fileInput("input_file", "Upload VCF File", accept = c(".vcf.gz")),
+           tabsetPanel(
+             tabPanel("Results",
+                      fluidRow(
+                        wellPanel(
+                          title = "Variant Information",
+                          solidHeader = TRUE,
+                          status = "primary",
+                          div(style = "overflow-x: scroll; width: 100%;",
+                              tableOutput("variant_table")
+                          )
+                        )
+                      )
+             ),
+             tabPanel(
+               "Graphs",
+               fluidRow(
+                 
+               )
+             )
+           )
+          ),
         
         tabItem(
           tabName = "diagnostic_report",
