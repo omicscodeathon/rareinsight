@@ -1,0 +1,8 @@
+/home/kcoetzer/nf/nf_references/RD_ref/gnomad/gnomad.genomes.v3.1.2.sites.af.vcf.gz
+/home/kcoetzer/nf/nf_references/RD_ref/gnomad/gnomad.genomes.v3.1.2.sites.af.vcf.gz.tbi
+/home/kcoetzer/nf/nf_references/RD_ref/gnomad/gnomad.genomes.v3.1.sites.chrM.vcf.gz
+/home/kcoetzer/nf/nf_references/RD_ref/gnomad/gnomad.genomes.v3.1.sites.chrM.vcf.gz.tbi
+/home/kcoetzer/nf/nf_references/RD_ref/clinvar_utf8.vcf.gz
+/home/kcoetzer/nf/nf_references/RD_ref/clinvar_utf8.vcf.gz.tbi
+/home/kcoetzer/nf/nf_references/RD_ref/CADD/whole_genome_SNVs.tsv.gz
+/home/kcoetzer/nf/nf_references/RD_ref/CADD/whole_genome_SNVs.tsv.gz.csi
