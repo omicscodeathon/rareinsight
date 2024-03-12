@@ -2,7 +2,7 @@ input: samplesheet.csv
 genome: GRCh38
 outdir: /path/to/directory/output/
 fasta: /path/to/file/Homo_sapiens/NCBI/GRCh38/Sequence/WholeGenomeFasta/genome.fa
-gnomad_af: /path/to/file/gnomad_reformated.tab.gz
+gnomad_af: /path/to/file/gnomad_reformated.vcf.gz
 intervals_wgs: /path/to/file/intervals/wgs.interval_list
 intervals_y: /path/to/file/intervals/chrY.interval_list
 variant_catalog: /path/to/file/variant_catalog_grch38.json
