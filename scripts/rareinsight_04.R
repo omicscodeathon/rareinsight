@@ -136,9 +136,6 @@ ui <- fluidPage(
               textInput("search_input", "Enter Search Term:", ""),
               actionButton("search_button", "Search"),
               DTOutput("search_results")
-            ),
-            box(
-              title = "Brief discription"
             )
           )
         ),
