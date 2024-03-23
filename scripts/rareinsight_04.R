@@ -173,7 +173,12 @@ ui <- fluidPage(
             tabPanel(
               "Disorder Information",
               h2("Disorder Information"),
-              p("This is the content for Disorder Information.")
+              p("This is the content for Disorder Information."),
+              actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
+              actionButton("buttonCLINVAR", label = "ClinVar", icon = icon("up-right-from-square")),
+              actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
+              actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
+              actionButton("buttonSupportGroup", label = "Support group", icon = icon("up-right-from-square"))
             ),
             tabPanel(
               "Clinician and Researcher Support",
@@ -299,7 +304,26 @@ server <- function(input, output, session) {
       }
     })
   })
-
+  # Add this inside the server function, after the UI and before the shinyApp() function
+  
+  observeEvent(input$buttonOMIM, {
+    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+    if (nchar(search_term) > 0) {
+      # If there's a search term, construct the OMIM search URL with the search term and open it in the browser
+      omim_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
+      browseURL(omim_search_url)
+    } else {
+      # If there's no search term, show an alert message
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
+    }
+  })
+  
   ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
