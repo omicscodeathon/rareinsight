@@ -23,8 +23,8 @@ ui <- fluidPage(
         menuItem("Home ", tabName = "home", icon = icon("home")),
         menuItem("Services", tabName = "service", icon = icon("bar-chart"),
                  menuSubItem("Input User Information", tabName = "input_user_info", icon = icon("user-circle")),
-                 menuSubItem("Search Panel", tabName = "Search", icon = icon("search", lib = "glyphicon" )),
                  menuSubItem("Vcf Panel", tabName = "vcfpanel", icon = icon("file")),
+                 menuSubItem("Search Panel", tabName = "Search", icon = icon("search", lib = "glyphicon" )),
                  menuItem("Diagnostic report", tabName = "diagnostic_report", icon = icon("line-chart"))
         ),
         menuItem("Acknowledgement", tabName = "acknow", icon = icon("handshake"))
@@ -175,7 +175,7 @@ ui <- fluidPage(
               h2("Disorder Information"),
               p("This is the content for Disorder Information."),
               actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
-              actionButton("buttonCLINVAR", label = "ClinVar", icon = icon("up-right-from-square")),
+              actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square")),
               actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
               actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
               actionButton("buttonSupportGroup", label = "Support group", icon = icon("up-right-from-square"))
@@ -304,8 +304,8 @@ server <- function(input, output, session) {
       }
     })
   })
-  # Add this inside the server function, after the UI and before the shinyApp() function
   
+  ### buttonOMIM
   observeEvent(input$buttonOMIM, {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
@@ -324,6 +324,62 @@ server <- function(input, output, session) {
     }
   })
   
+  ### buttonClinVar 
+  observeEvent(input$buttonClinVar, {
+    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+    if (nchar(search_term) > 0) {
+      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
+      omim_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
+      browseURL(omim_search_url)
+    } else {
+      # If there's no search term, show an alert message
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
+    }
+  })
+  
+  ### buttonPubMed 
+  observeEvent(input$buttonPubMed, {
+    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+    if (nchar(search_term) > 0) {
+      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
+      omim_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
+      browseURL(omim_search_url)
+    } else {
+      # If there's no search term, show an alert message
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
+    }
+  })
+  
+    ### buttongenomAD 
+    observeEvent(input$buttongenomAD, {
+      search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+      if (nchar(search_term) > 0) {
+        # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
+        omim_search_url <- paste0("https://gnomad.broadinstitute.org/search?query=", URLencode(search_term))
+        browseURL(omim_search_url)
+      } else {
+        # If there's no search term, show an alert message
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    })  
   ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
