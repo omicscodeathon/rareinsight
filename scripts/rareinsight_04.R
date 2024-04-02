@@ -240,7 +240,7 @@ server <- function(input, output, session) {
         }
 
         # Check if the file already exists
-        if (!file.exists("variant_summary.txt.gz")) {
+        if (!file.exists("variant_summary.txt")) {
           # Download the latest ClinVar summary from FTP server
           cat("...downloading latest ClinVar summary from: https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz...\n")
           download_file("https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz", "variant_summary.txt.gz")
