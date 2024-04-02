@@ -329,8 +329,8 @@ server <- function(input, output, session) {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
       # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      omim_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
-      browseURL(omim_search_url)
+      ClinVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
+      browseURL(ClinVar_search_url)
     } else {
       # If there's no search term, show an alert message
       showModal(
@@ -348,8 +348,8 @@ server <- function(input, output, session) {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
       # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      omim_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
-      browseURL(omim_search_url)
+      PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
+      browseURL(PubMed_search_url)
     } else {
       # If there's no search term, show an alert message
       showModal(
@@ -362,24 +362,51 @@ server <- function(input, output, session) {
     }
   })
   
-    ### buttongenomAD 
-    observeEvent(input$buttongenomAD, {
-      search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-      if (nchar(search_term) > 0) {
-        # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-        omim_search_url <- paste0("https://gnomad.broadinstitute.org/search?query=", URLencode(search_term))
-        browseURL(omim_search_url)
-      } else {
-        # If there's no search term, show an alert message
+  observeEvent(input$buttongenomAD, {
+    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+    if (nchar(search_term) > 0) {
+      # If there's a search term, query Ensembl REST API to get Ensembl ID
+      ensembl_api_url <- paste0("https://rest.ensembl.org/lookup/symbol/human/", URLencode(search_term), "?content-type=application/json")
+      ensembl_response <- httr::GET(ensembl_api_url)
+      if (httr::http_error(ensembl_response)) {
+        # If there's an error in API response, show an alert message
         showModal(
           modalDialog(
             title = "Error",
-            "Please enter a search term in the Search Panel first.",
+            "There was an error retrieving data from Ensembl.",
             easyClose = TRUE
           )
         )
+      } else {
+        ensembl_data <- httr::content(ensembl_response, as = "parsed")
+        if (length(ensembl_data) > 0) {
+          # If Ensembl ID found, construct the gnomAD search URL with the Ensembl ID and open it in the browser
+          ensembl_id <- ensembl_data$id
+          gnomad_search_url <- paste0("https://gnomad.broadinstitute.org/gene/", ensembl_id)
+          browseURL(gnomad_search_url)
+        } else {
+          # If Ensembl ID not found, show an alert message
+          showModal(
+            modalDialog(
+              title = "Error",
+              "No matching gene found in Ensembl.",
+              easyClose = TRUE
+            )
+          )
+        }
       }
-    })  
+    } else {
+      # If there's no search term, show an alert message
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
+    }
+  })
+  
   ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
