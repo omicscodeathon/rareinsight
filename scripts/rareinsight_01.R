@@ -5,6 +5,7 @@ if (!require("progress")) install.packages("progress")
 if (!require("data.table")) install.packages("data.table")
 if (!require("vcfR")) install.packages("vcfR")
 if (!require("DT")) install.packages("DT")
+if (!require("rmarkdown")) install.packages("rmarkdown")
 
 #Load packages
 library(shiny)
@@ -13,6 +14,7 @@ library(progress)
 library(data.table)
 library(vcfR)
 library(DT)  # For interactive tables
+library(rmarkdown)
 
 #Set UI function
 ui <- fluidPage(
@@ -120,7 +122,7 @@ ui <- fluidPage(
             column(6, dateInput(inputId = "dob", label = "Date of Birth")),
             column(12, textInput(inputId = "clinical_diagnosis", label = "Clinical Diagnosis (OMIM")),
             column(12, textInput(inputId = "phenotype", label = "Phenotype (HPO Terms)")),
-            column(12, selectInput(inputId = "rest_performed", label = "Test Performed", choices = c("WES", "WGS", "Gene Panel"))),
+            column(12, selectInput(inputId = "test_performed", label = "Test Performed", choices = c("WES", "WGS", "Gene Panel"))),
             downloadButton(outputId = "download_button", label = "Download User Info")
           )
         ),
@@ -161,7 +163,10 @@ ui <- fluidPage(
             tabPanel(
               "Graphs",
               fluidRow(
-
+                tabsetPanel(
+                  box("plot1", plotOutput("PLOT1")),
+                  box("plo2", plotOutput("PLOT2"))
+                )
               )
             )
           )
@@ -259,7 +264,7 @@ server <- function(input, output, session) {
       })
   })
 
-  ## user input part :
+  ## user input part : 
   user_info_text <- reactive({
     paste(
       "Name: ", input$name,"\n",
@@ -268,20 +273,45 @@ server <- function(input, output, session) {
       "Date of Birth: ", input$dob,"\n",
       "Clinical Diagnosis (OMIM): ", input$clinical_diagnosis,"\n",
       "Phenotype (HPO Terms): ", input$phenotype,"\n",
-      "Test Performed: ", input$rest_performed,"\n"
+      "Test Performed: ", input$test_performed,"\n"
     )
   })
-
+  
   # Function to generate downloadable user info content
   output$download_button <- downloadHandler(
-    filename = function() {
-      paste("user_info_", Sys.Date(), ".txt", sep = "")
-    },
-    content = function(file) {
-      writeLines(user_info_text(), file)
-    }
+        filename = function() {
+          paste( input$name,input$surname, Sys.Date(), ".pdf", sep = "")
+        },
+        content = function(file) {
+          # Create the R Markdown content
+          rmd_content <- sprintf('RAREINSIGHT REPORT
+                                 
+                            User Information : 
+                            __________________
+                                  
+                            Name: %s
+                            Surname: %s
+                            Ethnicity: %s
+                            Date of Birth: %s
+                            Clinical Diagnosis (OMIM): %s
+                            Phenotype (HPO Terms): %s
+                            Test Performed:  %s',
+                            input$name, input$surname, input$ethnicity, input$dob, input$clinical_diagnosis, input$phenotype, input$test_performed)
+                            img(src = "rareinsight_final.png", height = 50)
+          
+          # Create a temporary file to store the R Markdown content
+          temp_rmd_file <- tempfile(fileext = ".Rmd")
+          # Write the R Markdown content to the temporary file
+          writeLines(rmd_content, temp_rmd_file)
+          
+          # Render the R Markdown file to PDF
+          rmarkdown::render(temp_rmd_file, output_file = file)
+          # Remove the temporary R Markdown file
+          unlink(temp_rmd_file)
+        },
+        contentType = "application/pdf"  # Set content type to PDF
   )
-
+  
   ### Search Panel part
   observeEvent(input$search_button, {
     search_term <- input$search_input
@@ -460,6 +490,30 @@ server <- function(input, output, session) {
     variant_info <- subset(variant_info, select = -INFO)
 
     return(variant_info)
+  })
+ 
+  
+  # Generate  PLOT2
+  output$PLOT1 <- renderPlot({
+    vcf <- vcf_data()
+    plot(vcf)
+    chrom <- create.chromR(name='Supercontig', vcf=vcf)
+    plot(chrom)
+    chrom <- proc.chromR(chrom, verbose=TRUE)
+    plot(chrom)
+  }) 
+  
+  # Generate PLOT2
+  output$PLOT2 <- renderPlot({
+    vcf <- vcf_data()
+    plot(vcf)
+    chrom <- create.chromR(name='Supercontig', vcf=vcf)
+    plot(chrom)
+    chrom <- proc.chromR(chrom, verbose=TRUE)
+    plot(chrom)
+    chromoqc(chrom, dp.alpha=20)
+    #      chromoqc(chrom, xlim=c(5e+05, 6e+05))
+    
   })
 }
 
