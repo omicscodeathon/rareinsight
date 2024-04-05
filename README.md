@@ -19,5 +19,5 @@ Overall, this dashboard thrives on collaboration, by allowing researchers and cl
 - **Kimberly Christine Coetzer:** Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa
   
 - [Firas Zemzem](https://github.com/Zemzemfiras1) : PhD student ,Laboratory of Cytogenetics, Molecular Genetics and Biology of Reproduction CHU Farhat Hached Sousse, Higher institute of Biotechnology of Monastir, University of Monastir, Tunisia
-- [Gideon Akuamoah Wiafe](https://github.com/Gidoo) : MSc student, Neurogenomics Lab, Department of Medicine, Neuroscience Institute, University of Cape Town, South Africa; Department of Biomedical Sciences, University of Cape Coast, Ghana
+- [Gideon Akuamoah Wiafe](https://github.com/Gidoo) : MSc student, Neurogenomics Lab, Department of Medicine, Neuroscience Institute, University of Cape Town, Cape Town, South Africa; Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana
 - **Olaitan I Awe:** ASBCB, Cape Town, South Africa
