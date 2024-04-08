@@ -16,8 +16,14 @@ Overall, this dashboard thrives on collaboration, by allowing researchers and cl
 
 
 # Contributors
-- **Kimberly Christine Coetzer:** Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa
+- [Kimberly Christine Coetzer](https://github.com/Kimmiecc19) : PhD student, Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa
   
 - [Firas Zemzem](https://github.com/Zemzemfiras1) : PhD student ,Laboratory of Cytogenetics, Molecular Genetics and Biology of Reproduction CHU Farhat Hached Sousse, Higher institute of Biotechnology of Monastir, University of Monastir, Tunisia
+  
 - [Gideon Akuamoah Wiafe](https://github.com/Gidoo) : MSc student, Neurogenomics Lab, Department of Medicine, Neuroscience Institute, University of Cape Town, Cape Town, South Africa; Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana
-- **Olaitan I Awe:** ASBCB, Cape Town, South Africa
+  
+- [Enock K Amoako](https://github.com/ssyamoako) : Genomics and Bioinformatics Laboratory, West African Centre for Cell Biology of Infectious Pathogens (WACCBIP), University of Ghana, Legon, Ghana
+  
+- [Eva Akurut](https://github.com/AkurutEva) : African Centre of Excellence in Bioinformatics and Data-intensive Sciences, Infectious Disease Institute, Makerere University, Kampala, Uganda
+
+- [Olaitan I Awe](https://github.com/laitanawe) : Training officer, ASBCB, Cape Town, South Africa
