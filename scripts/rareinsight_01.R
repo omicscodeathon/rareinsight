@@ -23,6 +23,7 @@ ui <- fluidPage(
     dashboardSidebar(
       sidebarMenu(
         menuItem("Home ", tabName = "home", icon = icon("home")),
+        menuItem("Understanding your genetics", tabName = "understanding_genetics", icon = icon("education", lib = "glyphicon")),
         menuItem("Services", tabName = "service", icon = icon("bar-chart"),
                  menuSubItem("Input User Information", tabName = "input_user_info", icon = icon("user-circle")),
                  menuSubItem("Vcf Panel", tabName = "vcfpanel", icon = icon("file")),
@@ -107,6 +108,87 @@ ui <- fluidPage(
             )
           )
         ),
+
+        tabItem(
+          tabName = "understanding_genetics",
+          tabsetPanel(
+            tabPanel(
+              "Glossary",
+              h2("Glossary"),
+              p(HTML(style="text-align: justify;", "<a href='https://www.genomicseducation.hee.nhs.uk/glossary/'>Here</a> are some important terms to start with.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Allele:</b></h4>Variants of a gene found at the same position on a chromosome. They can be identical or different, and each variant creates a new allele. Some alleles have functional effects, like the numerous pathogenic variants in the BRCA1 gene.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Cell:</b></h4>The fundamental unit of life, enclosed by a membrane and containing organelles such as the nucleus. The cell's structure and function are determined by its DNA and environment, with changes in DNA potentially affecting both.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Chromosome:</b></h4>Bundles of DNA and associated proteins, with humans typically having 46 chromosomes in 23 pairs. Chromosomes contain nearly all of a cell's DNA, and changes to them can result in various conditions, including trisomies and structural abnormalities.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Diagnostic genomic test:</b></h4>A test providing a diagnosis for a condition caused by genomic changes. It confirms or refutes a diagnosis, with various technologies available, including targeted tests and broader approaches like whole exome or genome sequencing.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Diagnostic odyssey:</b></h4>A prolonged journey to receive a diagnosis for a medical condition, especially rare ones. It involves multiple tests, sometimes invasive, and can take years, often ending with genomic testing providing a conclusive diagnosis.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>DNA:</b></h4>The chemical carrying genetic information, made up of four bases: adenine, cytosine, guanine, and thymine. It contains all the instructions necessary for an organism's growth and maintenance, with changes in DNA having significant effects on an organism's characteristics.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Double helix:</b></h4>The structure formed by two DNA strands, with nucleotides arranged in a helical pattern. This structure aids in replication, with most DNA naturally occurring as a right-handed helix.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Exome:</b></h4>The portion of the genome consisting of exons, which encode proteins. It represents less than 2% of the human genome but is well understood compared to other regions.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Gene:</b></h4>A segment of DNA encoding a specific polypeptide, typically a protein or part of a protein. Genes play crucial roles in cellular function, and alterations within genes can lead to dysfunctional or absent protein products.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Genetics:</b></h4>The study of genes and their inheritance, often used interchangeably with genomics. Genetics focuses on individual genes, while genomics encompasses all DNA needed for an organism's development and function.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Genome:</b></h4>An organism's complete genetic material, encompassing both genes and non-coding sequences. Sequencing genomes aids in healthcare applications like disease prediction, diagnosis, and treatment.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Mutation:</b></h4>Any difference in a gene's sequence compared to a reference genome, potentially leading to altered gene function and disease. It can be synonymous with the term variant, particularly when referring to pathogenic alterations.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Next-generation sequencing:</b></h4>Modern high-throughput sequencing techniques reading millions of DNA or RNA fragments simultaneously. It allows for faster, cost-efficient sequencing and has broadened applications in routine healthcare.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Phenotype:</b></h4>An organism's observable characteristics, influenced by genetics and environment. It includes both physical traits and symptoms of conditions, guiding clinical investigations and diagnostics.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Sequencing:</b></h4>Laboratory technique determining the order of bases in DNA, crucial for various clinical contexts, with methods including Sanger sequencing and next-generation sequencing.")),
+              h4(HTML(style="text-align: justify;", "<h4><b>Variant:</b></h4>Any difference between two individuals' genomes or a reference genome, with variants having varying impacts, from harmless to disease-causing. They can range from single base changes to larger alterations."))
+            ),
+            tabPanel(
+              "Basic Genetics",
+              div(
+                h2(style="text-align: justify;", "What is Genetics?"),
+                h4(style="text-align: justify;", "Genomics = DNA = You"),
+                h4(style="text-align: justify;", "Genetics is the study of how traits are passed from parents to children. It involves understanding DNA, which contains the genetic instructions for building and maintaining our bodies."),
+                h4(style="text-align: justify;", "Genomics on the other hand is the study of an organism’s genome – its genetic material – and how that information is applied. All living things (plants, animals, humans etc.) have a genome – and ours is made up of DNA."),
+                h4(img(src = "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2019/06/Half-plus-half-equals-you-960x640.png", height = 300, width = 300)),
+              ),
+              div(
+                h2(style="text-align: justify;", "What makes up our genome?"),
+                h4(style="text-align: justify;", "Your genome is unique. A copy is found in almost every cell in your body and is organised into 46 chromosomes in 23 pairs. These chromosomes are made up of genes"),
+                h4(style="text-align: justify;", "Some sections of our DNA are called genes. Humans have around 20,000 'coding' genes, which contain the information to build proteins. These proteins are essential for building and repairing our bodies"),
+                h4(style="text-align: justify;", "Some genes determine physical characteristics, such as eye colour or height. This is also called our phenotype. Other genes can influence the chance of developing a health condition, such as cystic fibrosis or skeletal dysplasia."),
+                h4(img(src = "https://rareshareprod.s3.amazonaws.com/uploads/ckeditor/pictures/51/content_Chromosomes.png", height = 300, width = 300)),
+                h4(img(src = "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2018/08/DNA-double-helix_13081113544_l.jpg", height = 300, width = 300))
+              ),
+              div(
+                h2(style="text-align: justify;", "How do we study our genome: sequencing"),
+                h4(style="text-align: justify;", "Reading the 3 billion letters in a human genome is a huge task, and the process generates a vast amount of data. Sequencing one person’s whole genome amounts to around 200GB of data – the capacity of a typical computer."),
+                h4(style="text-align: justify;", "What happens to all that data? In the case of a genomic test, the data is filtered, analysed, interpreted, validated and assessed, alongside the patient’s health information, by a multidisciplinary team of health professionals, including bioinformaticians, clinical scientists and clinical geneticists. Only then can relevant results from a genomic test be passed on to the clinical team and their patient."),
+                h4(style="text-align: justify;", "As the genome is passed from both parent to offspring and from cell to cell in our body, any change in the DNA - known as a variant - can also be passed on. In healthcare, this becomes significant if the variant is associated with a particular medical condition which can result in a rare disease.")
+              ),
+              div(
+                h2(style="text-align: justify;", "How do we get these variants?"),
+                h4(style="text-align: justify;", "Genes are passed down from our parents"),
+                h4(style="text-align: justify;", "Every person has 2 copies of each gene with 23 chromosomes from your mother and 23 chromosomes from your father in each gene. Approximately 99.9% of the genes in your genome are identical from person to person. The remaining genes are known as variants. These variants can be seen as “spelling mistakes” in your genome and can either be very small (one letter) or very large (a whole sentence). Sometimes, these spelling mistakes can cause a genetic disorder and some of these disorders are very rare."),
+                h4(img(src = "https://cdn.bluebirdbio.com/-/media/Gene_Therapy/com/1/understanding-genetic-diseases/gene-inheritance-example.png?mw=522&rev=ac214731a4824980a5f5a0cf8df4b8a0&hash=DAE97500D51B477B45304E0B24BD7357", height = 300, width = 300))
+              )
+            ),
+            tabPanel(
+              "Rare Diseases",
+              div(
+                h2(style="text-align: justify;", "What are Rare Diseases?"),
+                h4(style="text-align: justify;", "A rare disease is a condition that affects fewer than 1 in 2,000 people."),
+                h4(style="text-align: justify;", "More than 7,000 rare diseases have been recorded in over 7000 different genes."),
+                h4(style="text-align: justify;", "Around 80% of rare diseases are caused by your genetics with around 70% manifesting in childhood."),
+                h4(style="text-align: justify;", "While these disorders are classified as rare, they can collectively affect 6–8% of the general population."),
+                h4(style="text-align: justify;", "Most people with a rare disease will face what is known as a ‘diagnostic odyssey’: the long journey a patient goes through to reach a diagnosis. These patients often see numerous healthcare professionals. Even if an accurate diagnosis is reached, the journey usually doesn’t end for the patient. This is because there is often a lack of available treatment options, a limited awareness of a patient’s condition and insufficient support available for patients and their families."),
+              ),
+              div(
+                h2(style="text-align: justify;", "How are these variants inherited?"),
+                h4(style="text-align: justify;", "There are three main types of changes that can cause a genetic disorder:"),
+                h4(style="text-align: justify;", "Single gene conditions: caused by changes to one gene."),
+                h4(style="text-align: justify;", "Chromosome conditions result from changes in the number or structure of the chromosomes."),
+                h4(style="text-align: justify;", "Multifactorial conditions (or complex diseases) are caused by changes in multiple genes, often in a complex interaction with environmental factors."),
+                h4(style="text-align: justify;", "These changes are inherited in 3 main ways"),
+                h4(img(src = "https://rareshareprod.s3.amazonaws.com/uploads/ckeditor/pictures/50/content_DomRessive.png", height = 300, width = 300)),
+                h4(style="text-align: justify;", "Dominant conditions happen when a person has one “healthy” copy and one mutated copy of a gene. If one parent has the mutation, there is a 50% chance of passing it on to a child in each pregnancy. Sometimes a patient has a mutated gene but neither parent has the same mutation. This is known as a de novo variant."),
+                h4(style="text-align: justify;", "Recessive conditions only occur when an individual has two mutated copies of a gene. If a person has only one copy of this mutated gene, they are known as a carrier of the condition and may pass it to their children."),
+                h4(style="text-align: justify;", "X-linked conditions are caused by genes mutated on your X chromosome. Females have two X chromosomes while males only have on X chromosome and one Y chromosome. Because of this, X-linked conditions more commonly affect males.")
+              )
+            )
+          )
+        ),
+
 
         tabItem(
           tabName = "service",
@@ -264,7 +346,7 @@ server <- function(input, output, session) {
       })
   })
 
-  ## user input part : 
+  ## user input part :
   user_info_text <- reactive({
     paste(
       "Name: ", input$name,"\n",
@@ -276,19 +358,19 @@ server <- function(input, output, session) {
       "Test Performed: ", input$test_performed,"\n"
     )
   })
-  
+
   # Function to generate downloadable user info content
   output$download_button <- downloadHandler(
-        filename = function() {
-          paste( input$name,input$surname, Sys.Date(), ".pdf", sep = "")
-        },
-        content = function(file) {
-          # Create the R Markdown content
-          rmd_content <- sprintf('RAREINSIGHT REPORT
-                                 
-                            User Information : 
+    filename = function() {
+      paste( input$name,input$surname, Sys.Date(), ".pdf", sep = "")
+    },
+    content = function(file) {
+      # Create the R Markdown content
+      rmd_content <- sprintf('RAREINSIGHT REPORT
+
+                            User Information :
                             __________________
-                                  
+
                             Name: %s
                             Surname: %s
                             Ethnicity: %s
@@ -296,22 +378,22 @@ server <- function(input, output, session) {
                             Clinical Diagnosis (OMIM): %s
                             Phenotype (HPO Terms): %s
                             Test Performed:  %s',
-                            input$name, input$surname, input$ethnicity, input$dob, input$clinical_diagnosis, input$phenotype, input$test_performed)
-                            img(src = "rareinsight_final.png", height = 50)
-          
-          # Create a temporary file to store the R Markdown content
-          temp_rmd_file <- tempfile(fileext = ".Rmd")
-          # Write the R Markdown content to the temporary file
-          writeLines(rmd_content, temp_rmd_file)
-          
-          # Render the R Markdown file to PDF
-          rmarkdown::render(temp_rmd_file, output_file = file)
-          # Remove the temporary R Markdown file
-          unlink(temp_rmd_file)
-        },
-        contentType = "application/pdf"  # Set content type to PDF
+                             input$name, input$surname, input$ethnicity, input$dob, input$clinical_diagnosis, input$phenotype, input$test_performed)
+      img(src = "rareinsight_final.png", height = 50)
+
+      # Create a temporary file to store the R Markdown content
+      temp_rmd_file <- tempfile(fileext = ".Rmd")
+      # Write the R Markdown content to the temporary file
+      writeLines(rmd_content, temp_rmd_file)
+
+      # Render the R Markdown file to PDF
+      rmarkdown::render(temp_rmd_file, output_file = file)
+      # Remove the temporary R Markdown file
+      unlink(temp_rmd_file)
+    },
+    contentType = "application/pdf"  # Set content type to PDF
   )
-  
+
   ### Search Panel part
   observeEvent(input$search_button, {
     search_term <- input$search_input
@@ -334,7 +416,7 @@ server <- function(input, output, session) {
       }
     })
   })
-  
+
   ### buttonOMIM
   observeEvent(input$buttonOMIM, {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
@@ -353,8 +435,8 @@ server <- function(input, output, session) {
       )
     }
   })
-  
-  ### buttonClinVar 
+
+  ### buttonClinVar
   observeEvent(input$buttonClinVar, {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
@@ -372,8 +454,8 @@ server <- function(input, output, session) {
       )
     }
   })
-  
-  ### buttonPubMed 
+
+  ### buttonPubMed
   observeEvent(input$buttonPubMed, {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
@@ -391,7 +473,7 @@ server <- function(input, output, session) {
       )
     }
   })
-  
+
   observeEvent(input$buttongenomAD, {
     search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
@@ -436,7 +518,7 @@ server <- function(input, output, session) {
       )
     }
   })
-  
+
   ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
@@ -491,8 +573,8 @@ server <- function(input, output, session) {
 
     return(variant_info)
   })
- 
-  
+
+
   # Generate  PLOT2
   output$PLOT1 <- renderPlot({
     vcf <- vcf_data()
@@ -501,8 +583,8 @@ server <- function(input, output, session) {
     plot(chrom)
     chrom <- proc.chromR(chrom, verbose=TRUE)
     plot(chrom)
-  }) 
-  
+  })
+
   # Generate PLOT2
   output$PLOT2 <- renderPlot({
     vcf <- vcf_data()
@@ -513,10 +595,8 @@ server <- function(input, output, session) {
     plot(chrom)
     chromoqc(chrom, dp.alpha=20)
     #      chromoqc(chrom, xlim=c(5e+05, 6e+05))
-    
+
   })
 }
 
 shinyApp(ui, server)
-
-                                 
