@@ -6,6 +6,7 @@ if (!require("data.table")) install.packages("data.table")
 if (!require("vcfR")) install.packages("vcfR")
 if (!require("DT")) install.packages("DT")
 if (!require("rmarkdown")) install.packages("rmarkdown")
+if (!require("shinyjs")) install.packages("shinyjs")
 
 #Load packages
 library(shiny)
@@ -15,6 +16,9 @@ library(data.table)
 library(vcfR)
 library(DT)  # For interactive tables
 library(rmarkdown)
+library(shinyjs)
+
+options(shiny.maxRequestSize = 10 * 1024^2)
 
 #Set UI function
 ui <- fluidPage(
@@ -77,7 +81,7 @@ ui <- fluidPage(
 
                                 /* body */
                                 .content-wrapper, .right-side {
-                                background-color: #FFFFFF	;
+                                background-color: #FFFFFF ;
                                 }
 
                                 '))),
@@ -140,7 +144,7 @@ ui <- fluidPage(
                 h4(style="text-align: justify;", "Genomics = DNA = You"),
                 h4(style="text-align: justify;", "Genetics is the study of how traits are passed from parents to children. It involves understanding DNA, which contains the genetic instructions for building and maintaining our bodies."),
                 h4(style="text-align: justify;", "Genomics on the other hand is the study of an organism’s genome – its genetic material – and how that information is applied. All living things (plants, animals, humans etc.) have a genome – and ours is made up of DNA."),
-                h4(img(src = "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2019/06/Half-plus-half-equals-you-960x640.png", height = 300, width = 300)),
+                h4(img(src = "https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2019/06/Half-plus-half-equals-you-960x640.png", height = 300, width = 300))
               ),
               div(
                 h2(style="text-align: justify;", "What makes up our genome?"),
@@ -171,7 +175,7 @@ ui <- fluidPage(
                 h4(style="text-align: justify;", "More than 7,000 rare diseases have been recorded in over 7000 different genes."),
                 h4(style="text-align: justify;", "Around 80% of rare diseases are caused by your genetics with around 70% manifesting in childhood."),
                 h4(style="text-align: justify;", "While these disorders are classified as rare, they can collectively affect 6–8% of the general population."),
-                h4(style="text-align: justify;", "Most people with a rare disease will face what is known as a ‘diagnostic odyssey’: the long journey a patient goes through to reach a diagnosis. These patients often see numerous healthcare professionals. Even if an accurate diagnosis is reached, the journey usually doesn’t end for the patient. This is because there is often a lack of available treatment options, a limited awareness of a patient’s condition and insufficient support available for patients and their families."),
+                h4(style="text-align: justify;", "Most people with a rare disease will face what is known as a ‘diagnostic odyssey’: the long journey a patient goes through to reach a diagnosis. These patients often see numerous healthcare professionals. Even if an accurate diagnosis is reached, the journey usually doesn’t end for the patient. This is because there is often a lack of available treatment options, a limited awareness of a patient’s condition and insufficient support available for patients and their families.")
               ),
               div(
                 h2(style="text-align: justify;", "How are these variants inherited?"),
@@ -201,9 +205,9 @@ ui <- fluidPage(
             column(6, textInput(inputId = "name", label = "Name")),
             column(6, textInput(inputId = "surname", label = "Surname")),
             column(6, textInput(inputId = "ethnicity", label = "Ethnicity")),
-            column(6, dateInput(inputId = "dob", label = "Date of Birth")),
-            column(12, textInput(inputId = "clinical_diagnosis", label = "Clinical Diagnosis (OMIM")),
-            column(12, textInput(inputId = "phenotype", label = "Phenotype (HPO Terms)")),
+            column(6, dateInput(inputId = "dob", label = "Date of Birth")), #TODO: User must be able to select year from search
+            column(12, textInput(inputId = "clinical_diagnosis", label = "Clinical Diagnosis")),
+            column(12, textInput(inputId = "phenotype", label = "Phenotype")),
             column(12, selectInput(inputId = "test_performed", label = "Test Performed", choices = c("WES", "WGS", "Gene Panel"))),
             downloadButton(outputId = "download_button", label = "Download User Info")
           )
@@ -215,7 +219,7 @@ ui <- fluidPage(
           fluidRow(
             wellPanel(
               selectInput("search_type", "Search Type:",
-                          choices = c("Gene", "Variant", "Disorder"),
+                          choices = c("Gene", "Variant", "Disorder", "dbSNP", "ClinVar"),
                           selected = "Gene"),
               textInput("search_input", "Enter Search Term:", ""),
               actionButton("search_button", "Search"),
@@ -260,22 +264,30 @@ ui <- fluidPage(
             tabPanel(
               "Disorder Information",
               h2("Disorder Information"),
-              p("This is the content for Disorder Information."),
-              actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
-              actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square")),
-              actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
-              actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
-              actionButton("buttonSupportGroup", label = "Support group", icon = icon("up-right-from-square"))
+              p("Here is some information on the selected disorder, accession or gene from the Clinvar search panel.")
             ),
             tabPanel(
               "Clinician and Researcher Support",
-              h2("Clinician and Researcher Support"),
-              p("This is the content for Clinician and Researcher Support.")
+              h2("Information for clinician and researchers"),
+              p("This is the content for Clinician and Researcher Support."),
+              h2("If you typed in a Gene name, you can search the following links:"),
+              actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
+              actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square")),
+              actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
+              actionButton("buttonGeneReviews", label = "GeneReviews", icon = icon("up-right-from-square")),
+              #actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
+              h2("If you typed in a dbSNP ID or Clinvar accession in the search panel, you can search the following links:"),
+              actionButton("buttonVarsome", label = "Varsome", icon = icon("up-right-from-square")),
+              actionButton("buttonLitVar", label = "LitVar", icon = icon("up-right-from-square")),
+              actionButton("buttondbSNP", label = "dbSNP", icon = icon("up-right-from-square")),
+              actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square"))
             ),
             tabPanel(
               "Patient Support",
               h2("Patient Support"),
-              p("This is the content for Patient Support.")
+              p("Support page for rare disease patients and families"),
+              actionButton("buttonRareConnect", label = "Rare Connect", icon = icon("up-right-from-square"), onclick ="window.open('https://www.rareconnect.org/en', '_blank')"),
+              actionButton("buttonRAReSOURCE", label = "RAReSOURCE", icon = icon("up-right-from-square"), onclick ="window.open('https://raresource.nih.gov/diseases', '_blank')")
             )
           )
         ),
@@ -289,9 +301,9 @@ ui <- fluidPage(
           h4(HTML("<a href='https://github.com/AkurutEva'>E Akurut</a>: African Centre of Excellence in Bioinformatics and Data-intensive Sciences, Infectious Disease Institute, Makerere University, Kampala, Uganda")),
           h4(HTML("<a href='https://github.com/gwiafe'>G Wiafe</a>: Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana")),
           h4(HTML("<a href='https://github.com/laitanawe'>OI Awe</a>: African Society for Bioinformatics and Computational Biology, Cape Town, South Africa")),
-          h1("Thank you to the following organizations:"),
-          h4("African Society for Bioinformatics and Computational Biology",
-             img(src = "asbcb-logo.png", height = 50, width = 50))
+          h3(HTML("<a href='https://github.com/omicscodeathon/rareinsight/'>GitHub</a>: Read more about this research and access all our scripts.")),
+          h1("Thank you to the following organizations for their support:"),
+          h4("African Society for Bioinformatics and Computational Biology", img(src = "asbcb-logo.png", height = 50, width = 50))
         )
       )
     )
@@ -300,92 +312,84 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output, session) {
+  
   # Define variant_summary outside observe block
-  variant_summary <- reactiveVal(NULL)
-
+  variant_summary <- reactiveVal(data.frame())
+  
+  # Load variant_summary data
   observe({
     withProgress(
       message = 'Downloading and processing data...',
       detail = 'This may take a while...',
       value = 0, {
-
-        # Download and process data
-        download_file <- function(url, dest_file) {
-          if (!file.exists(dest_file)) {
-            tryCatch(
-              {
-                system(paste("curl -o", dest_file, url))
-                cat("...done...\n")
-              },
-              error = function(e) {
-                cat("Error:", e$message, "\n")
-              }
-            )
+        if (nrow(variant_summary()) == 0) {
+          # Check if the file already exists
+          if (!file.exists("variant_summary.txt")) {
+            # Download the latest ClinVar summary from FTP server
+            cat("...downloading latest ClinVar summary from: https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz...\n")
+            download.file("https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz", "variant_summary.txt.gz")
           } else {
-            cat("...File already exists...\n")
+            # File exists, so inform the user
+            cat("...previous version found... skipping download and unzip....\n")
           }
+          
+          # Unzip the file
+          cat("...unzipping the file...\n")
+          system("gunzip variant_summary.txt.gz")  # Use -f option to force overwrite if the file already exists
+          
+          # Read the file
+          variant_summary_data <- read.delim("variant_summary.txt", stringsAsFactors = FALSE)
+          
+          # Filter columns
+          variant_summary_data_filtered <- variant_summary_data %>%
+            dplyr::select(2, 3, 5, 7, 10, 12, 13, 14, 29)
+          
+          # Update the reactive value
+          variant_summary(variant_summary_data_filtered)
         }
-
-        # Check if the file already exists
-        if (!file.exists("variant_summary.txt")) {
-          # Download the latest ClinVar summary from FTP server
-          cat("...downloading latest ClinVar summary from: https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz...\n")
-          download_file("https://ftp.ncbi.nlm.nih.gov/pub/clinvar/tab_delimited/variant_summary.txt.gz", "variant_summary.txt.gz")
-        } else {
-          # File exists, so inform the user
-          cat("...previous version found... skipping download....\n")
-        }
-
-        # Unzip the file
-        cat("...unzipping the file...\n")
-        system("gunzip -f variant_summary.txt.gz")  # Use -f option to force overwrite if the file already exists
-
-        # Read the file
-        variant_summary_data <- read.delim("variant_summary.txt", stringsAsFactors = FALSE)
-        variant_summary(variant_summary_data)
-      })
+      }
+    )
   })
-
-  ## user input part :
+  
+  # User info text
   user_info_text <- reactive({
     paste(
       "Name: ", input$name,"\n",
       "Surname: ", input$surname,"\n",
       "Ethnicity: ", input$ethnicity,"\n",
       "Date of Birth: ", input$dob,"\n",
-      "Clinical Diagnosis (OMIM): ", input$clinical_diagnosis,"\n",
-      "Phenotype (HPO Terms): ", input$phenotype,"\n",
+      "Clinical Diagnosis: ", input$clinical_diagnosis,"\n",
+      "Phenotype: ", input$phenotype,"\n",
       "Test Performed: ", input$test_performed,"\n"
     )
   })
-
-  # Function to generate downloadable user info content
+  
+  # Downloadable user info content
   output$download_button <- downloadHandler(
     filename = function() {
-      paste( input$name,input$surname, Sys.Date(), ".pdf", sep = "")
+      paste(input$name, input$surname, Sys.Date(), ".pdf", sep = "")
     },
     content = function(file) {
       # Create the R Markdown content
       rmd_content <- sprintf('RAREINSIGHT REPORT
+                            ![](rareinsight_final.png){ width=50px }
 
                             User Information :
-                            __________________
+                            ______________________________
 
                             Name: %s
                             Surname: %s
                             Ethnicity: %s
                             Date of Birth: %s
-                            Clinical Diagnosis (OMIM): %s
-                            Phenotype (HPO Terms): %s
-                            Test Performed:  %s',
+                            Clinical Diagnosis: %s
+                            Phenotype: %s
+                            Test Performed: %s',
                              input$name, input$surname, input$ethnicity, input$dob, input$clinical_diagnosis, input$phenotype, input$test_performed)
-      img(src = "rareinsight_final.png", height = 50)
-
       # Create a temporary file to store the R Markdown content
       temp_rmd_file <- tempfile(fileext = ".Rmd")
       # Write the R Markdown content to the temporary file
       writeLines(rmd_content, temp_rmd_file)
-
+      
       # Render the R Markdown file to PDF
       rmarkdown::render(temp_rmd_file, output_file = file)
       # Remove the temporary R Markdown file
@@ -393,119 +397,36 @@ server <- function(input, output, session) {
     },
     contentType = "application/pdf"  # Set content type to PDF
   )
-
-  ### Search Panel part
+  
+  # Observing search button click
   observeEvent(input$search_button, {
     search_term <- input$search_input
     search_type <- input$search_type
-    # Define the column to search based on search type
-    search_column <- switch(
-      search_type,
-      "Gene" = "GeneSymbol",
-      "Variant" = "Name",
-      "Disorder" = "PhenotypeList"
-    )
-    # Filter data based on search term and column
-    filtered_data <- variant_summary()[grep(search_term, variant_summary()[[search_column]], ignore.case = TRUE), ]
-    output$search_results <- renderDT({
-      if(nrow(filtered_data) == 0) {
-        # Display a message if no results are found
-        HTML("<p>No matching results found.</p>")
+    
+    req(search_term, search_type) # Ensure search term and type are available
+    
+    if (nchar(search_term) > 0) {
+      # Define the column to search based on search type
+      search_column <- switch(
+        search_type,
+        "Gene" = "GeneSymbol",
+        "Variant" = "Name",
+        "Disorder" = "PhenotypeList",
+        "dbSNP" = "RS...dbSNP.",
+        "ClinVar" = "RCVaccession"
+      )
+      
+      # Filter data based on search term and column
+      indices <- grep(search_term, variant_summary()[[search_column]], ignore.case = TRUE)
+      if (length(indices) > 0) {
+        filtered_data <- variant_summary()[indices, ]
+        output$search_results <- renderDT({
+          datatable(filtered_data, options = list(scrollX = TRUE))
+        })
       } else {
-        datatable(filtered_data, options = list(scrollX = TRUE))
-      }
-    })
-  })
-
-  ### buttonOMIM
-  observeEvent(input$buttonOMIM, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the OMIM search URL with the search term and open it in the browser
-      omim_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
-      browseURL(omim_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
-        )
-      )
-    }
-  })
-
-  ### buttonClinVar
-  observeEvent(input$buttonClinVar, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      ClinVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
-      browseURL(ClinVar_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
-        )
-      )
-    }
-  })
-
-  ### buttonPubMed
-  observeEvent(input$buttonPubMed, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
-      browseURL(PubMed_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
-        )
-      )
-    }
-  })
-
-  observeEvent(input$buttongenomAD, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, query Ensembl REST API to get Ensembl ID
-      ensembl_api_url <- paste0("https://rest.ensembl.org/lookup/symbol/human/", URLencode(search_term), "?content-type=application/json")
-      ensembl_response <- httr::GET(ensembl_api_url)
-      if (httr::http_error(ensembl_response)) {
-        # If there's an error in API response, show an alert message
-        showModal(
-          modalDialog(
-            title = "Error",
-            "There was an error retrieving data from Ensembl.",
-            easyClose = TRUE
-          )
-        )
-      } else {
-        ensembl_data <- httr::content(ensembl_response, as = "parsed")
-        if (length(ensembl_data) > 0) {
-          # If Ensembl ID found, construct the gnomAD search URL with the Ensembl ID and open it in the browser
-          ensembl_id <- ensembl_data$id
-          gnomad_search_url <- paste0("https://gnomad.broadinstitute.org/gene/", ensembl_id)
-          browseURL(gnomad_search_url)
-        } else {
-          # If Ensembl ID not found, show an alert message
-          showModal(
-            modalDialog(
-              title = "Error",
-              "No matching gene found in Ensembl.",
-              easyClose = TRUE
-            )
-          )
-        }
+        output$search_results <- renderDT({
+          HTML("<p>No matching results found.</p>")
+        })
       }
     } else {
       # If there's no search term, show an alert message
@@ -516,9 +437,55 @@ server <- function(input, output, session) {
           easyClose = TRUE
         )
       )
+      return()
     }
   })
-
+  
+  # Handling links opening in the browser
+  observeEvent(input$search_button, {
+    search_term <- input$search_input
+    search_type <- input$search_type
+    
+    req(search_term, search_type) # Ensure search term and type are available
+    
+    if (nchar(search_term) > 0) {
+      observeEvent(input$buttonOMIM, {
+        omim_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
+        browseURL(omim_url)
+      })
+      
+      observeEvent(input$buttonClinVar, {
+        clinvar_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "&redir=rcv")
+        browseURL(clinvar_url)
+      })
+      
+      observeEvent(input$buttonPubMed, {
+        pubmed_gene_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
+        browseURL(pubmed_gene_url)
+      })
+      
+      observeEvent(input$buttonVarsome, {
+        varsome_gene_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
+        browseURL(varsome_gene_url)
+      })
+      
+      observeEvent(input$buttonLitVar, {
+        litvar_gene_url <- paste0("https://www.ncbi.nlm.nih.gov/research/litvar2/docsum?variant=litvar@", URLencode(search_term), "%23&query=")
+        browseURL(litvar_gene_url)
+      })
+      
+      observeEvent(input$buttondbSNP, {
+        dbSNP_url <- paste0("https://www.ncbi.nlm.nih.gov/snp/?term=", URLencode(search_term))
+        browseURL(dbSNP_url)
+      })
+      
+      observeEvent(input$buttonGeneReviews, {
+        genereviews_url <- paste0("https://www.ncbi.nlm.nih.gov/books/NBK1116/?term=", URLencode(search_term), "gene%20review")
+        browseURL(genereviews_url)
+      })
+    }
+  })
+  
   ## VCF upload file part
   vcf_data <- reactive({
     req(input$input_file)
@@ -526,29 +493,25 @@ server <- function(input, output, session) {
     vcf_data <- read.vcfR(vcf_file)
     return(vcf_data)
   })
-
+  
   output$variant_table <- renderTable({
     req(vcf_data())
-
+    
     # Extract variant information and filter PASS variants
     variant_info <- as.data.frame(vcf_data()@fix)
-    ############ variant_info <- variant_info[variant_info$FILTER == "PASS", ]
-
+    
     # Remove ID and QUAL columns
-    ############ variant_info <- subset(variant_info, select = -c(ID, QUAL))
-
-    # Remobe ID is not Abvailable "NA"
     if (any(is.na(variant_info$ID))) {
       variant_info <- subset(variant_info, select = -c(ID))
     }
-
+    
     # Split INFO column into separate columns
     info_split <- strsplit(as.character(variant_info$INFO), ";")
     max_splits <- max(lengths(info_split))
-
+    
     # Create dataframe to store split columns
     info_df <- data.frame(matrix(NA, ncol = max_splits, nrow = nrow(variant_info)))
-
+    
     # Extract column names and values from INFO column
     info_names_values <- lapply(info_split, function(x) {
       splits <- strsplit(x, "=")
@@ -556,7 +519,7 @@ server <- function(input, output, session) {
       values <- sapply(splits, `[`, 2)
       return(list(names = names, values = values))
     })
-
+    
     # Fill in split columns with appropriate column names
     for (i in 1:max_splits) {
       column_values <- sapply(info_names_values, function(info) ifelse(length(info$values) >= i, info$values[i], NA))
@@ -564,18 +527,17 @@ server <- function(input, output, session) {
       colnames(info_df)[i] <- col_names
       info_df[, i] <- column_values
     }
-
+    
     # Combine split INFO columns with original dataframe
     variant_info <- cbind(variant_info, info_df)
-
+    
     # Remove original INFO column
     variant_info <- subset(variant_info, select = -INFO)
-
+    
     return(variant_info)
   })
-
-
-  # Generate  PLOT2
+  
+  # Generate PLOT1
   output$PLOT1 <- renderPlot({
     vcf <- vcf_data()
     plot(vcf)
@@ -584,7 +546,7 @@ server <- function(input, output, session) {
     chrom <- proc.chromR(chrom, verbose=TRUE)
     plot(chrom)
   })
-
+  
   # Generate PLOT2
   output$PLOT2 <- renderPlot({
     vcf <- vcf_data()
@@ -595,7 +557,6 @@ server <- function(input, output, session) {
     plot(chrom)
     chromoqc(chrom, dp.alpha=20)
     #      chromoqc(chrom, xlim=c(5e+05, 6e+05))
-
   })
 }
 
