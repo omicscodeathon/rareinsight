@@ -524,42 +524,37 @@ server <- function(input, output, session) {
     }
   })
   
-  #buttonOMIM
   observeEvent(input$buttonOMIM, {
     search_term <- isolate(input$search_input)
     search_type <- isolate(input$search_type) 
-    if (search_type %in% c("Gene", "ClinVar")) {
-      if (nchar(search_term) > 0) {
-        if (search_type == "Gene") {
-          # Construct the OMIM search URL for gene
-          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
-        } else if (search_type == "ClinVar") {
-          # Construct the Clinvar search URL for RCVaccession
-          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term))
-        } else if (search_type %in% c("dbSNP", "Disorder")) {
-          # Check if "rs" is in the search term, if not, add it for dbSNP
-          if (search_type == "dbSNP" && !grepl("rs", search_term, ignore.case = TRUE)) {
-            search_term <- paste0("rs", search_term)
-          }
-          # Check if search term has more than one word, replace spaces with + for Disorder
-          if (search_type == "Disorder" && length(strsplit(search_term, " ")[[1]]) > 1) {
-            search_term <- gsub(" ", "+", search_term)
-          }
-          # Construct the search URL for dbSNP or Disorder
-          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=", URLencode(search_term))
+    
+    if (nchar(search_term) > 0) {
+      omim_search_url <- ""
+      
+      if (search_type %in% c("Gene", "ClinVar", "Disorder")) {
+        # Construct the OMIM search URL based on the search type
+        omim_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
+      } else if (search_type == "dbSNP") {
+        # Check if "rs" is in the search term, if not, add it
+        if (!grepl("rs", search_term, ignore.case = TRUE)) {
+          search_term <- paste0("rs", search_term)
         }
-        browseURL(OMIM_search_url)
-      } else {
-        showModal(
-          modalDialog(
-            title = "Error",
-            "Please enter a search term in the Search Panel first.",
-            easyClose = TRUE
-          )
-        )
+        # Construct the OMIM search URL for dbSNP
+        omim_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
       }
+      
+      browseURL(omim_search_url)
+    } else {
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
     }
   })
+  
   
   ### buttonClinVar
   observeEvent(input$buttonClinVar, {
@@ -615,11 +610,9 @@ server <- function(input, output, session) {
     search_type <- isolate(input$search_type)   # Get the search term from the Search Panel
     if (search_type %in% c("Gene", "Disorder")) {
       if (nchar(search_term) > 0) {
-        if (search_type == "Gene") {
           # Construct the PubMed search URL for gene only
           PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
-        }
-        browseURL(PubMed_search_url)
+          browseURL(PubMed_search_url)
       } else {
         showModal(
           modalDialog(
