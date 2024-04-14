@@ -221,7 +221,14 @@ ui <- fluidPage(
                           selected = "Gene"),
               textInput("search_input", "Enter Search Term:", ""),
               actionButton("search_button", "Search"),
-              DTOutput("search_results")
+              DTOutput("search_results"),
+              # Heading with examples
+              tags$h4(style = "opacity: 0.5;", "Examples:"),
+              tags$p(style = "opacity: 0.5;", "For ClinVar enter the accession e.g. RCV000007523."),
+              tags$p(style = "opacity: 0.5;", "For dbSNP enter the accession number only (remove rs) e.g. 137854557."),
+              tags$p(style = "opacity: 0.5;", "For Gene enter a GeneSymbol e.g. BRCA1."),
+              tags$p(style = "opacity: 0.5;", "For Disorder enter the name of the disorder e.g. Noonan Syndrome."),
+              tags$p(style = "opacity: 0.5;", "For Variant enter the amino acid change (c.44C>T), protein change (p.Pro15Leu) or the reference sequence from the GenBank database (NM_004006.3).")
             )
           )
         ),
@@ -263,29 +270,98 @@ ui <- fluidPage(
               "Disorder Information",
               h2("Disorder Information"),
               p("THere is some information on the selected disorder, accession or gene from the Clinvar search panel."),
-              ),
+              fluidRow(
+                column( width = 12,
+                  actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "Online Mendelian Inheritance in Man (OMIM) is a comprehensive database of human genes and genetic phenotypes. It catalogues information about genetic disorders and their associated genes, including clinical descriptions, molecular mechanisms, and inheritance patterns. Clinicians and researchers can use OMIM to explore the genetic basis of rare diseases and access curated information about specific disorders."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene, ClinVar, dbSNP or Disorder")
+                ),
+                column(width = 12,
+                  actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "PubMed provides clinicians with a repository of literature, aiding in  evidence-based practices into patient care, particularly in rare diseases where information is limited. For researchers, PubMed is useful for conducting literature reviews, identifying research gaps, and fostering collaboration to advance understanding and treatment of rare diseases."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene")
+                ),
+                column(width = 12,
+                  actionButton("buttonNORD", label = "NORD", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "NORD's rare disease database is a comprehensive resource providing information on various rare disorders, including their symptoms, causes, treatments, and available support services. It serves as a valuable tool for  clinicians and researchers seeking reliable information and resources."),
+                  p(style="text-align: justify;", "This button works if you entered: Disorder")
+                )
+              )
+            ),
             tabPanel(
               "Clinician and Researcher Support",
               h2("Information for clinician and researchers"),
               p("This is the content for Clinician and Researcher Support."),
-              h2("If you typed in a Gene name, you can search the following links:"),
-              actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
-              actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square")),
-              actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
-               actionButton("buttonPubMed", label = "PubMed", icon = icon("up-right-from-square")),
-              actionButton("buttonGeneReviews", label = "GeneReviews", icon = icon("up-right-from-square")),
-              h2("If you typed in a dbSNP ID or Clinvar accession in the search panel, you can search the following links:"),
-              actionButton("buttonVarsome", label = "Varsome", icon = icon("up-right-from-square")),
-              actionButton("buttonLitVar", label = "LitVar", icon = icon("up-right-from-square")),
-              actionButton("buttondbSNP", label = "dbSNP", icon = icon("up-right-from-square")),
-            #  actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square"))
+              fluidRow(
+                column(width = 6,
+                  actionButton("buttonClinVar", label = "ClinVar", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "ClinVar is a public archive of reports and interpretations of the clinical significance of genomic variants. It aggregates data from various sources. It can be used to evaluate the significance of genetic variants in the context of rare diseases, aiding in diagnosis, treatment decisions, and research investigations."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene or a ClinVar accession")
+                ),
+                column(width = 6,
+                  actionButton("buttongenomAD", label = "genomAD", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "The Genome Aggregation Database is a  resource that aggregates sequencing data from a diverse range of populations. It provides  information about genetic variation, including allele frequencies, functional annotations, and population-specific patterns. The frequency and distribution of genetic variants across populations can be assessed aiding in interpretation of rare and common variants in many populations."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene")
+                ),
+                column(width = 6,
+                  actionButton("buttonPubMed1", label = "PubMed", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "PubMed provides clinicians and researchers with an updated repository of literature on disorders and genes aiding in an improved understanding of rare diseases."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene or Disorder")
+                ),
+                column(width = 6,
+                  actionButton("buttonGeneReviews", label = "GeneReviews", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "GeneReviews is a comprehensive resource providing expert-authored, peer-reviewed information about genetic conditions. It offers detailed summaries of specific genes and the associated diseases. It can be used to inform patient care and research efforts."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene")
+                ),
+                column(width = 6,
+                  actionButton("buttonVarsome", label = "Varsome", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "Varsome is a variant interpretation tool that helps clinicians and researchers analyze and interpret genetic variants. It integrates data from various sources to provide  variant annotations and interpretations which can be used to assess the clinical significance of variants in rare diseases."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene, dbSNP, or Disorder")
+                ),
+                column(width = 6,
+                  actionButton("buttonLitVar", label = "LitVar", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "LitVar is a database that aggregates information about variants, genes and disorders mentioned in  literature. It provides annotations and links to relevant publications, helping researchers and clinicians stay updated on the latest findings related to rare diseases."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene, dbSNP, or Disorder")
+                ),
+                column(width = 6,
+                  actionButton("buttondbSNP", label = "dbSNP", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "The Single Nucleotide Polymorphism Database (dbSNP) is a repository that catalogs genetic variation. It can be used to explore genetic variation across populations and understand how specific variants may be associated with rare diseases."),
+                  p(style="text-align: justify;", "This button works if you entered: Gene or dbSNP")
+                ),
+                column(width = 6,
+                  actionButton("buttonNORD1", label = "NORD", icon = icon("up-right-from-square")),
+                  p(style="text-align: justify;", "NORD provides a comprehensive resource for information on rare disorders, including their symptoms, causes, treatments, etc. It serves as a valuable tool for seeking reliable information and resources."),
+                  p(style="text-align: justify;", "This button works if you entered: Disorder")
+                )
+              )
             ),
             tabPanel(
               "Patient Support",
               h2("Patient Support"),
               p("Support page for rare disease patients and families"),
-              actionButton("buttonRareConnect", label = "Rare Connect", icon = icon("up-right-from-square")),
-              actionButton("buttonRAReSOURCE", label = "RAReSOURCE", icon = icon("up-right-from-square"))
+              fluidRow(
+                column(width = 6,
+                       actionButton("buttonRareConnect", label = "RareConnect", icon = icon("up-right-from-square")),
+                       p(style="text-align: justify;", "RareConnect is an online platform that connects people affected by rare diseases worldwide. It hosts various disease-specific communities where patients, caregivers, and advocates can share experiences, ask questions, and provide support to each other.")
+                ),
+                column(width = 6,
+                       actionButton("buttonRAReSOURCE", label = "RAReSOURCE", icon = icon("up-right-from-square")),
+                       p(style="text-align: justify;", "RARe-SOURCE provides a list of rare diseases with their gene associations, links to related features within the database and links to external data sources.")
+                ),
+                column(width = 6,
+                       actionButton("buttonRDSA", label = "RDSA", icon = icon("up-right-from-square")),
+                       p(style="text-align: justify;", "Rare Diseases South Africa is a non-profit organisation which advocates for rare disease patients to achieve greater recognition, support, improved health service and better overall quality of life. It allows patients and families to access local support groups, advocacy organizations, and healthcare resources.")
+                ),
+                column(width = 6,
+                       actionButton("buttonGARD", label = "GARD", icon = icon("up-right-from-square")),
+                       p(style="text-align: justify;", "The Genetic and Rare Diseases Information Center (GARD) provides access to comprehensive information about rare diseases. It allows users to search for specific diseases and access resources such as overviews, symptoms, causes, treatment options, and research updates."),
+                       p(style="text-align: justify;", "This button works if you entered: Disorder")
+                ),
+                column(width = 6,
+                       actionButton("buttonNORDORG", label = "NORD Patient Organizations", icon = icon("up-right-from-square")),
+                       p(style="text-align: justify;", "NORD's patient organizations database raises awareness about rare disorders by connecting affected individuals and families  with relevant support groups and advocacy organizations around the world.")
+                )
+              )
             )
           )
         ),
@@ -405,165 +481,336 @@ server <- function(input, output, session) {
         contentType = "application/pdf"  # Set content type to PDF
   )
   
-  ### Search Panel part
+  # Observing search button click
   observeEvent(input$search_button, {
     search_term <- input$search_input
     search_type <- input$search_type
-    # Define the column to search based on search type
-    search_column <- switch(
-      search_type,
-      "Gene" = "GeneSymbol",
-      "Variant" = "Name",
-      "Disorder" = "PhenotypeList",
-      "dbSNP" = "RS...dbSNP.",
-      "ClinVar" = "RCVaccession"
-    )
-    # Filter data based on search term and column
-    filtered_data <- variant_summary()[grep(search_term, variant_summary()[[search_column]], ignore.case = TRUE), ]
-    output$search_results <- renderDT({
-      if(nrow(filtered_data) == 0) {
-        # Display a message if no results are found
-        HTML("<p>No matching results found.</p>")
+    
+    req(search_term, search_type) # Ensure search term and type are available
+    
+    if (nchar(search_term) > 0) {
+      # Define the column to search based on search type
+      search_column <- switch(
+        search_type,
+        "Gene" = "GeneSymbol",
+        "Variant" = "Name",
+        "Disorder" = "PhenotypeList",
+        "dbSNP" = "RS...dbSNP.",
+        "ClinVar" = "RCVaccession"
+      )
+      
+      # Filter data based on search term and column
+      indices <- grep(search_term, variant_summary()[[search_column]], ignore.case = TRUE)
+      if (length(indices) > 0) {
+        filtered_data <- variant_summary()[indices, ]
+        output$search_results <- renderDT({
+          datatable(filtered_data, options = list(scrollX = TRUE))
+        })
       } else {
-        datatable(filtered_data, options = list(scrollX = TRUE))
+        output$search_results <- renderDT({
+          HTML("<p>No matching results found.</p>")
+        })
       }
-    })
+    } else {
+      # If there's no search term, show an alert message
+      showModal(
+        modalDialog(
+          title = "Error",
+          "Please enter a search term in the Search Panel first.",
+          easyClose = TRUE
+        )
+      )
+      return()
+    }
   })
   
-  ### buttonOMIM
+  #buttonOMIM
   observeEvent(input$buttonOMIM, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the OMIM search URL with the search term and open it in the browser
-      omim_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
-      browseURL(omim_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Gene", "ClinVar")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the OMIM search URL for gene
+          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term), "&sort=score+desc%2C+prefix_sort+desc&limit=10&date_created_from=&date_created_to=&date_updated_from=&date_updated_to=")
+        } else if (search_type == "ClinVar") {
+          # Construct the Clinvar search URL for RCVaccession
+          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&search=", URLencode(search_term))
+        } else if (search_type %in% c("dbSNP", "Disorder")) {
+          # Check if "rs" is in the search term, if not, add it for dbSNP
+          if (search_type == "dbSNP" && !grepl("rs", search_term, ignore.case = TRUE)) {
+            search_term <- paste0("rs", search_term)
+          }
+          # Check if search term has more than one word, replace spaces with + for Disorder
+          if (search_type == "Disorder" && length(strsplit(search_term, " ")[[1]]) > 1) {
+            search_term <- gsub(" ", "+", search_term)
+          }
+          # Construct the search URL for dbSNP or Disorder
+          OMIM_search_url <- paste0("https://www.omim.org/search?index=entry&start=1&limit=10&sort=score+desc%2C+prefix_sort+desc&search=", URLencode(search_term))
+        }
+        browseURL(OMIM_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
+      }
     }
   })
   
-  ### buttonClinVar 
+  ### buttonClinVar
   observeEvent(input$buttonClinVar, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      ClinVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
-      browseURL(ClinVar_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Gene", "ClinVar")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the Clinvar search URL for gene
+          ClinVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "%5Bgene%5D&redir=gene")
+        } else if (search_type == "ClinVar") {
+          # Construct the Clinvar search URL for RCVaccession
+          ClinVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/clinvar/?term=", URLencode(search_term), "&redir=rcv")
+        }
+        browseURL(ClinVar_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
+      }
     }
   })
   
-  ### buttonPubMed 
+  ### buttonPubMed
   observeEvent(input$buttonPubMed, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
-      browseURL(PubMed_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type)   # Get the search term from the Search Panel
+    if (search_type %in% c("Gene")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the PubMed search URL for gene only
+          PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
+        }
+        browseURL(PubMed_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
+      }
     }
   })
-  
-  ### buttonGeneReviews 
+  ### buttonPubMed1 in Clinician and research support panel
+  observeEvent(input$buttonPubMed1, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type)   # Get the search term from the Search Panel
+    if (search_type %in% c("Gene", "Disorder")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the PubMed search URL for gene only
+          PubMed_search_url <- paste0("https://pubmed.ncbi.nlm.nih.gov/?term=", URLencode(search_term))
+        }
+        browseURL(PubMed_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  ### buttonGeneReviews
   observeEvent(input$buttonGeneReviews, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      GeneReviews_search_url <- paste0("https://www.ncbi.nlm.nih.gov/books/NBK1116/?term=", URLencode(search_term), "gene%20review")
-      browseURL(GeneReviews_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type)   # Get the search term from the Search Panel
+    if (search_type %in% c("Gene")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the GeneReviews search URL for gene only
+          GeneReviews_search_url <- paste0("https://www.ncbi.nlm.nih.gov/books/NBK1116/?term=", URLencode(search_term), "gene%20review")
+        }
+        browseURL(GeneReviews_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
+      }
     }
   })
   
-  ### buttonLitVarsome
-  observeEvent(input$buttonVarsome, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      Varsome_search_url <- paste0("https://varsome.com/gene/hg38/", URLencode(search_term))
-      browseURL(Varsome_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
-        )
-      )
-    }
-  })
-  
-  ### buttonLitVar 
+  ### buttonLitVar   
   observeEvent(input$buttonLitVar, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      LitVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/research/litvar2/docsum?text=", URLencode(search_term))
-      browseURL(LitVar_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) # Get the search term from the Search Panel
+    if (search_type %in% c("Gene", "Disorder")) {
+      if (nchar(search_term) > 0) {
+        # Construct the LitVar search URL for gene or disorder
+        if (length(strsplit(search_term, " ")[[1]]) > 1) {
+          search_term <- gsub(" ", "%20", search_term)
+        }
+        LitVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/research/litvar2/docsum?text=", URLencode(search_term))
+        browseURL(LitVar_search_url) # Moved browseURL here
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
-    }
-  })
-  ### buttonLdbSNP 
-  observeEvent(input$buttondbSNP, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
-    if (nchar(search_term) > 0) {
-      # If there's a search term, construct the Clinvar search URL with the search term and open it in the browser
-      dbSNP_search_url <- paste0("https://www.ncbi.nlm.nih.gov/snp/?term=", URLencode(search_term))
-      browseURL(dbSNP_search_url)
-    } else {
-      # If there's no search term, show an alert message
-      showModal(
-        modalDialog(
-          title = "Error",
-          "Please enter a search term in the Search Panel first.",
-          easyClose = TRUE
+      }
+    } else if (search_type == "dbSNP") {
+      if (nchar(search_term) > 0) {
+        # Check if "rs" is in the search term, if not, add it
+        if (!grepl("rs", search_term, ignore.case = TRUE)) {
+          search_term <- paste0("rs", search_term)
+        }
+        # Construct the LitVar search URL for dbSNP
+        LitVar_search_url <- paste0("https://www.ncbi.nlm.nih.gov/research/litvar2/docsum?variant=litvar@", URLencode(search_term), "%23%23&query=")
+        browseURL(LitVar_search_url) # Moved browseURL here
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
         )
-      )
+      }
     }
   })
   
+  ### buttonVarsome
+  observeEvent(input$buttonVarsome, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Gene", "dbSNP", "Disorder")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the Varsome search URL for gene
+          Varsome_search_url <- paste0("https://varsome.com/gene/hg38/", URLencode(search_term))
+        } else if (search_type == "dbSNP") {
+          # Construct the Varsome search URL for dbSNP
+          Varsome_search_url <- paste0("https://varsome.com/variant/hg38/", URLencode(search_term))
+        } else if (search_type == "Disorder") {
+          # Check if search term has more than one word, replace spaces with %20
+          if (length(strsplit(search_term, " ")[[1]]) > 1) {
+            search_term <- gsub(" ", "%20", search_term)
+          }
+          # Construct the Disorder search URL for disease name
+          Varsome_search_url <- paste0("https://varsome.com/search-results/", URLencode(search_term))
+        }
+        browseURL(Varsome_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  
+  ### buttondbSNP
+  observeEvent(input$buttondbSNP, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Gene", "dbSNP")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Gene") {
+          # Construct the dbSNP search URL for gene
+          dbSNP_search_url <- paste0("https://www.ncbi.nlm.nih.gov/snp/?term=", URLencode(search_term))
+        } else if (search_type == "dbSNP") {
+          # Construct the dbSNP search URL for dbSNP
+          dbSNP_search_url <- paste0("https://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=", URLencode(search_term))
+        }
+        browseURL(dbSNP_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  
+  ### buttonNORD
+  observeEvent(input$buttonNORD, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Disorder")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Disorder") {
+          # Check if search term has more than one word, replace spaces with -
+          if (length(strsplit(search_term, " ")[[1]]) > 1) {
+            search_term <- gsub(" ", "-", search_term)
+          }
+          # Construct the NORD search URL for disorder
+          NORD_search_url <- paste0("https://rarediseases.org/rare-diseases/", URLencode(search_term))
+        }
+        browseURL(NORD_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  ### buttonNORD in Clinician and Researcher Support panel
+  observeEvent(input$buttonNORD1, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Disorder")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Disorder") {
+          # Check if search term has more than one word, replace spaces with -
+          if (length(strsplit(search_term, " ")[[1]]) > 1) {
+            search_term <- gsub(" ", "-", search_term)
+          }
+          # Construct the NORD search URL for disorder
+          NORD_search_url <- paste0("https://rarediseases.org/rare-diseases/", URLencode(search_term))
+        }
+        browseURL(NORD_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  #buttongnomAD
   observeEvent(input$buttongenomAD, {
-    search_term <- isolate(input$search_input)  # Get the search term from the Search Panel
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type)  # Get the search term from the Search Panel
     if (nchar(search_term) > 0) {
       # If there's a search term, query Ensembl REST API to get Ensembl ID
       ensembl_api_url <- paste0("https://rest.ensembl.org/lookup/symbol/human/", URLencode(search_term), "?content-type=application/json")
@@ -607,14 +854,51 @@ server <- function(input, output, session) {
     }
   })
   
-  ### buttonbuttonRareConnect 
+  ### buttonRareConnect
   observeEvent(input$buttonRareConnect, {
-      browseURL("https://www.rareconnect.org/en")
+    browseURL("https://www.rareconnect.org/en")
   })
-  ### buttonbuttonRAReSOURCE
+  ### buttonRAReSOURCE
   observeEvent(input$buttonRAReSOURCE, {
     browseURL("https://raresource.nih.gov/diseases")
   })
+  ### buttonRDSA
+  observeEvent(input$buttonRDSA, {
+    browseURL("https://www.rarediseases.co.za/support-groups-index")
+  })
+  ### buttonNORDORG
+  observeEvent(input$buttonNORDORG, {
+    browseURL("https://rarediseases.org/rare-diseases/")
+  })
+  
+  
+  ### buttonGARD
+  observeEvent(input$buttonGARD, {
+    search_term <- isolate(input$search_input)
+    search_type <- isolate(input$search_type) 
+    if (search_type %in% c("Disorder")) {
+      if (nchar(search_term) > 0) {
+        if (search_type == "Disorder") {
+          # Check if search term has more than one word, replace spaces with %20
+          if (length(strsplit(search_term, " ")[[1]]) > 1) {
+            search_term <- gsub(" ", "%20", search_term)
+          }
+          # Construct the GARD search URL for disorder
+          GARD_search_url <- paste0("https://rarediseases.info.nih.gov/diseases?category=&page=1&letter=&search=", URLencode(search_term))
+        }
+        browseURL(GARD_search_url)
+      } else {
+        showModal(
+          modalDialog(
+            title = "Error",
+            "Please enter a search term in the Search Panel first.",
+            easyClose = TRUE
+          )
+        )
+      }
+    }
+  })
+  
    
   ## VCF upload file part
   vcf_data <- reactive({
