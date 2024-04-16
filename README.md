@@ -20,7 +20,7 @@ Input User Information panel: Users can input patient information to this panel.
 
 Search Panel: Once the dashboard is initiated, the latest ClinVar variant summary file will automatically download. Users can only access the functions of the dashboard once the download has been completed. 
 
-VCF Panel: Users can input a vcf.gz file that was ideally produced with the nf-core/raredisease pipeline. Files created with GATK can also be uploaded. Users can optionally input a filtered VCF file in .txt format. This is a filtered version of a VCF file obtained from the nf-core/raredisease pipeline. It includes the gene name, amino acid change, protein change, clinical diagnosis and clinical significance. 
+VCF Panel: Users can input a vcf.gz file that was ideally produced with the nf-core/raredisease pipeline. Files created with GATK can also be uploaded. Users can optionally input a filtered VCF file in .txt format. This is a filtered version of a VCF file obtained from the nf-core/raredisease pipeline. Users can filter their files using the filter_vcf.py script (found in the scripts folder). It includes the gene name, amino acid change, protein change, clinical diagnosis and clinical significance. 
 
 # Outputs
 
