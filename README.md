@@ -10,6 +10,12 @@ By encapsulating clinical relevance, genetic implications, and essential resourc
 
 Overall, this dashboard thrives on collaboration, by allowing researchers and clinicians to seamlessly share and collaborate on reports, fostering knowledge exchange and enriching the collective understanding of rare diseases. In essence, RareInsight is poised to redefine rare disease diagnosis and research by inviting collaboration and innovation to enhance healthcare outcomes in an open-source format.
 
+# Workflow
+
+![Basic outline of workflow](https://github.com/omicscodeathon/rareinsight/blob/main/figures/rareinsight_workflow.png)
+
+
+
 # Deployment
 
 Currently, RareInsight can be deployed from RStudio. The GitHub repository can be saved and uploaded into Rstudio where users can run the App. 
