@@ -1,6 +1,6 @@
 import csv
 
-def extract_variants_and_info(vcf_file, gene_panel_file, output_file):
+def extract_info(vcf_file, gene_panel_file, output_file):
     # Read gene panel
     gene_panel = set()
     with open(gene_panel_file, 'r') as gene_panel_csv:
@@ -10,8 +10,10 @@ def extract_variants_and_info(vcf_file, gene_panel_file, output_file):
 
     # Extract variants and information
     with open(vcf_file, 'r') as vcf, open(output_file, 'w') as output:
+        output.write("Gene\tAmino Acid change\tProtein Change\tClinical Diagnosis\tClinical Significance\n")
+
         for line in vcf:
-            if line.startswith('#'):  # Skip header lines
+            if line.startswith('#'): #Skips headers
                 continue
 
             columns = line.split('\t')
@@ -23,7 +25,6 @@ def extract_variants_and_info(vcf_file, gene_panel_file, output_file):
 
             # Extract CLNDN information
             clndn_info = [x.split('=')[1] for x in info_column.split(';') if x.startswith('CLNDN=')]
-            clndn_info = clndn_info[0] if clndn_info else '.'
 
             # Extract CLNSIG information
             clnsig_info = [x.split('=')[1] for x in info_column.split(';') if x.startswith('CLNSIG=')]
@@ -47,5 +48,3 @@ def extract_variants_and_info(vcf_file, gene_panel_file, output_file):
 vcf_file = 'input.vcf'
 gene_panel_file = 'gene_panel.txt'
 output_file = 'output.txt'
-
-extract_variants_and_info(vcf_file, gene_panel_file, output_file)
