@@ -18,7 +18,7 @@ library(DT)  # For interactive tables
 library(rmarkdown)
 library(shinyjs)
 
-options(shiny.maxRequestSize = 10 * 1024^2)
+options(shiny.maxRequestSize = 20 * 1024^2)
 
 #Set UI function
 ui <- fluidPage(
