@@ -921,7 +921,7 @@ server <- function(input, output, session) {
     # Remove ID and QUAL columns
     ############ variant_info <- subset(variant_info, select = -c(ID, QUAL))
 
-    # Remobe ID is not Abvailable "NA"
+    # Remove ID, if not Available "NA"
     if (any(is.na(variant_info$ID))) {
       variant_info <- subset(variant_info, select = -c(ID))
     }
