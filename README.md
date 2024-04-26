@@ -16,21 +16,21 @@ Currently, RareInsight can be deployed from RStudio using the [rareinsight_01.R]
 
 # User input
 
-Input User Information panel: Users can input patient information to this panel.
+*Input User Information panel:* Users can input patient information to this panel.
 
-Search Panel: Once the dashboard is initiated, the latest ClinVar variant summary file will automatically download. Users can only access the functions of the dashboard once the download has been completed. 
+*Search Panel:* Once the dashboard is initiated, the latest ClinVar variant summary file will automatically download. Users can only access the functions of the dashboard once the download has been completed. 
 
-VCF Panel: Users can input a vcf.gz file that was ideally produced with the nf-core/raredisease pipeline. Files created with GATK can also be uploaded. Users can optionally input a filtered VCF file. Currently the script produces a filtered VCF file from the nf-core/raredisease pipeline. Users can filter their files using the filter_vcf.py script (found in the scripts folder). It includes the CSQ information from VEP, clinical diagnosis (CLNDN) and clinical significance (CLNSIG). 
+*VCF Panel:* Users can input a vcf.gz file that was ideally produced with the nf-core/raredisease pipeline. Files created with GATK can also be uploaded. Users can optionally input a filtered VCF file. Currently the script produces a filtered VCF file from the nf-core/raredisease pipeline. Users can filter their files using the filter_vcf.py script (found in the scripts folder). It includes the CSQ information from VEP, clinical diagnosis (CLNDN) and clinical significance (CLNSIG). 
 
 # Outputs
 
-Input User Information panel: Users can export the information in PDF format.
+*Input User Information panel:* Users can export the information in PDF format.
 
-VCF Panel: Users can expect to visualize a VCF file in table format. Two plots are also generated to show the quality of the VCF file. 
+*VCF Panel:* Users can expect to visualize a VCF file in table format. Two plots are also generated to show the quality of the VCF file. 
 
-Search Panel: Users can see and filter the ClinVar variant summary file. This file can be filtered according to a given gene, variant, disorder, ClinVar accession or dbSNP accession. It can then be further filtered by searching for specific information in the table.
+*Search Panel:* Users can see and filter the ClinVar variant summary file. This file can be filtered according to a given gene, variant, disorder, ClinVar accession or dbSNP accession. It can then be further filtered by searching for specific information in the table.
 
-Diagnostic report: Based on the search term used in the Search Panel, users can access links specific to this search term. Resources include PubMed, ClinVar, dbSNP, GeneReviews, LitVar2, gnomAD, Varsome and NORD. Patient-specific resources are also available such as RareConnect, RAReSOURCE, GARD and NORD patient organizations. 
+*Diagnostic report:* Based on the search term used in the Search Panel, users can access links specific to this search term. Resources include PubMed, ClinVar, dbSNP, GeneReviews, LitVar2, gnomAD, Varsome and NORD. Patient-specific resources are also available such as RareConnect, RAReSOURCE, GARD and NORD patient organizations. 
 
 # Contributors
 - [Kimberly Christine Coetzer](https://github.com/Kimmiecc19) : PhD student, Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa
