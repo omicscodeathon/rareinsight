@@ -124,7 +124,7 @@ ui <- fluidPage(
             tabPanel(
               "Glossary",
               h2("Glossary"),
-              p(HTML(style="text-align: justify;", "<a href='https://www.genomicseducation.hee.nhs.uk/glossary/'>Here</a> are some important terms to start with.")),
+              p(HTML("<a href='https://www.genomicseducation.hee.nhs.uk/glossary/'>Here</a> are some important terms to start with.")),
               h4(HTML(style="text-align: justify;", "<h4><b>Allele:</b></h4>Variants of a gene found at the same position on a chromosome. They can be identical or different, and each variant creates a new allele. Some alleles have functional effects, like the numerous pathogenic variants in the BRCA1 gene.")),
               h4(HTML(style="text-align: justify;", "<h4><b>Cell:</b></h4>The fundamental unit of life, enclosed by a membrane and containing organelles such as the nucleus. The cell's structure and function are determined by its DNA and environment, with changes in DNA potentially affecting both.")),
               h4(HTML(style="text-align: justify;", "<h4><b>Chromosome:</b></h4>Bundles of DNA and associated proteins, with humans typically having 46 chromosomes in 23 pairs. Chromosomes contain nearly all of a cell's DNA, and changes to them can result in various conditions, including trisomies and structural abnormalities.")),
