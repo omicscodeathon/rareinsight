@@ -381,7 +381,6 @@ ui <- fluidPage(
           h2("Contributors:"),
           h4(HTML("<a href='https://github.com/Kimmiecc19'>KC Coetzer</a>: Division of Molecular Biology and Human Genetics, Department of Biomedical Sciences, Faculty of Medicine and Health Sciences, Stellenbosch University, Cape Town, South Africa")),
           h4(HTML("<a href='https://github.com/Zemzemfiras1'>F Zemzem</a>: Laboratory of Cytogenetics, Molecular Genetics and Biology of Reproduction CHU Farhat Hached Sousse, Higher Institute of Biotechnology of Monastir, University of Monastir, Tunisia")),
-          h4(HTML("<a href='https://github.com/ssyamoako'>EK Amoako</a>: Genomics and Bioinformatics Laboratory, West African Centre for Cell Biology of Infectious Pathogens (WACCBIP), University of Ghana, Legon, Ghana")),
           h4(HTML("<a href='https://github.com/AkurutEva'>E Akurut</a>: African Centre of Excellence in Bioinformatics and Data-intensive Sciences, Infectious Disease Institute, Makerere University, Kampala, Uganda")),
           h4(HTML("<a href='https://github.com/gwiafe'>G Wiafe</a>: Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana")),
           h4(HTML("<a href='https://github.com/laitanawe'>OI Awe</a>: African Society for Bioinformatics and Computational Biology, Cape Town, South Africa")),
