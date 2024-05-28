@@ -9,6 +9,9 @@ Following a successful diagnosis, rare disease patients and their families typic
 ![Outline of main functions of the dashboard](https://github.com/omicscodeathon/rareinsight/blob/main/figures/RI_functions.png)
 
 
+# Tutorial
+
+![Video demonstrating the main functions of the dashboard](https://github.com/omicscodeathon/rareinsight/blob/main/www/RareInsight_tutorial.mp4)
 
 # Deployment
 
