@@ -6,7 +6,7 @@ Following a successful diagnosis, rare disease patients and their families typic
 
 # Workflow
 
-![Outline of main functions of the dashboard]([https://github.com/omicscodeathon/rareinsight/blob/main/figures/rareinsight_workflow.png](https://github.com/omicscodeathon/rareinsight/blob/main/figures/RI_workflow.png))
+![Outline of main functions of the dashboard](https://github.com/omicscodeathon/rareinsight/blob/main/figures/RI_workflow.png)
 
 
 
