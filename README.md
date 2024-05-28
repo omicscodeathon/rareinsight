@@ -6,13 +6,13 @@ Following a successful diagnosis, rare disease patients and their families typic
 
 # Workflow
 
-![Basic outline of workflow](https://github.com/omicscodeathon/rareinsight/blob/main/figures/rareinsight_workflow.png)
+![Outline of main functions of the dashboard]([https://github.com/omicscodeathon/rareinsight/blob/main/figures/rareinsight_workflow.png](https://github.com/omicscodeathon/rareinsight/blob/main/figures/RI_workflow.png))
 
 
 
 # Deployment
 
-Currently, RareInsight can be deployed from RStudio using the [rareinsight_01.R]([https://github.com/Kimmiecc19](https://github.com/omicscodeathon/rareinsight/blob/main/scripts/rareinsight_01.R)) script. The GitHub repository can be saved and uploaded into Rstudio where users can run the App. 
+Currently, RareInsight can be deployed from RStudio using the scripts/rareinsight_01.R script. The GitHub repository can be saved and uploaded into Rstudio where users can run the App. 
 
 # User input
 
