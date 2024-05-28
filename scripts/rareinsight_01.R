@@ -109,7 +109,7 @@ ui <- fluidPage(
                 ),
                 fluidRow(
                   column(width = 12,
-                         tags$video(src = "Capture vidéo du 15 أفريل, 2024 CET 11:24:10 ص.webm", 
+                         tags$video(src = "https://github.com/omicscodeathon/rareinsight/blob/main/www/RareInsight_tutorial.mp4", 
                                     type = "video/mp4", 
                                     width = "100%", 
                                     controls = TRUE)
