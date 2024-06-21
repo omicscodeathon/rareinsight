@@ -7,6 +7,7 @@ if (!require("vcfR")) install.packages("vcfR")
 if (!require("DT")) install.packages("DT")
 if (!require("rmarkdown")) install.packages("rmarkdown")
 if (!require("shinyjs")) install.packages("shinyjs")
+if (!require("httr")) install.packages("httr")
 
 #Load packages
 library(shiny)
@@ -17,6 +18,7 @@ library(vcfR)
 library(DT)  # For interactive tables
 library(rmarkdown)
 library(shinyjs)
+library(httr)
 
 options(shiny.maxRequestSize = 60 * 1024^2)
 
