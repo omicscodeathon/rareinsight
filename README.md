@@ -42,7 +42,7 @@ Currently, RareInsight can be deployed from RStudio using the scripts/rareinsigh
 
 - [Eva Akurut](https://github.com/AkurutEva) : African Centre of Excellence in Bioinformatics and Data-intensive Sciences, Infectious Disease Institute, Makerere University, Kampala, Uganda
   
-- [Gideon Akuamoah Wiafe](https://github.com/Gidoo) : MSc student, Neurogenomics Lab, Department of Medicine, Neuroscience Institute, University of Cape Town, Cape Town, South Africa; Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana
+- [Gideon Akuamoah Wiafe](https://github.com/Gidoo) : MSc student, Neurogenomics Lab, Neuroscience Institute, University of Cape Town, Cape Town, South Africa; Department of Medicine, Faculty of Health Sciences, University of Cape Town, Cape Town, South Africa; Department of Biomedical Sciences, University of Cape Coast, Cape Coast, Ghana
 
 - [Olaitan I Awe](https://github.com/laitanawe) : Training officer, ASBCB, Cape Town, South Africa
 
