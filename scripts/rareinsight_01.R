@@ -281,7 +281,7 @@ ui <- fluidPage(
             tabPanel(
               "Disorder Information",
               h2("Disorder Information"),
-              p("THere is some information on the selected disorder, accession or gene from the Clinvar search panel."),
+              p("Here is some information on the selected disorder, accession or gene from the Clinvar search panel."),
               fluidRow(
                 column( width = 12,
                   actionButton("buttonOMIM", label = "OMIM", icon = icon("up-right-from-square")),
