@@ -1,0 +1,184 @@
+---
+title: "RareInsight Guide: Simplifying Genetic Results Using Online Resources"
+author: "RareInsight Team"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+
+![](www/rareinsight_final.png){width=150px}
+
+This guide introduces trusted online resources that help patients, families, and clinicians better understand genetic test results and rare disease information.
+
+> **Disclaimer:** Always interpret genetic results with the help of a clinical geneticist.
+
+---
+
+## 1. ClinVar: Interpreting Genetic Variants
+
+**ClinVar** is a free resource which helps explain if a variant is harmful (pathogenic) or harmless (benign).  
+
+ClinVar shows:  
+- Variants submitted by clinical labs and researchers  
+- Their clinical significance (e.g., benign, uncertain, pathogenic)  
+- Related conditions and their level of evidence  
+
+| Classification         | What It Means                        |
+|------------------------|--------------------------------------|
+| Pathogenic             | Causes disease                       |
+| Likely Pathogenic      | Strong evidence of disease link      |
+| Uncertain Significance | Unknown effect                       |
+| Likely Benign          | Likely harmless                      |
+| Benign                 | Harmless                             |
+
+---
+
+## 2. gnomAD: Understanding Variant Frequency
+
+**gnomAD** is a population database that shows how common a genetic variant is among large groups of healthy people.
+
+- If a variant is **very common** in the general population, especially among healthy individuals, it is unlikely to cause a rare genetic disease.
+- If a variant is **very rare** or missing in the general population, it may be more likely to be associated with a rare disease.
+
+### Dominant vs. Recessive Conditions
+
+In genetics, "dominant" and "recessive" describe how different versions of a gene (called **alleles**) affect traits.
+
+- A **dominant allele** shows its effect even when only **one copy** is inherited.  
+- A **recessive allele** needs **two copies** (one from each parent) to show its effect.
+
+Here’s an easy-to-understand comparison:
+
+| Feature               | **Dominant Trait**                                  | **Recessive Trait**                                           |
+|----------------------|-----------------------------------------------------|---------------------------------------------------------------|
+| **What it means**     | Trait shows if **one copy** of the gene is changed | Trait shows **only if both copies** of the gene are changed  |
+| **Who has the trait** | Anyone with just **one changed gene**              | Only people with **two changed genes**                        |
+| **Carriers**          | Not applicable                                     | Carriers have **one copy** of the change, but no symptoms     |
+| **Passed down from**  | One parent                                         | Both parents                                                   |
+| **Examples**          | Brown eyes, dimples                                | Blue eyes, albinism, cystic fibrosis                          |
+
+> *A carrier* is someone who has a gene change but does not have the condition. They can still pass it on to their children.
+
+### So, what is considered rare in the general population?
+
+| Frequency              | Interpretation                                             |
+|------------------------|------------------------------------------------------------|
+| Very rare (<0.01%)     | Could be linked to rare diseases                           |
+| Common (>1%)           | Often harmless (especially for dominant conditions)        |
+
+---
+
+## 3. NORD: Rare disease support
+
+**NORD** provides simplified information and connects patients to communities and support groups.
+
+Their mission is to *improve the health and well-being of people with rare diseases* by driving advances in care, research and policy.
+
+As a patient or caregiver, you can:  
+- Read summaries of rare conditions  
+- Find advocacy groups  
+- Learn about treatments and clinical trials  
+- Get access to some helpful [resources](https://rarediseases.org/resource-library/)
+
+---
+
+## 4. GARD: Genetic and Rare Diseases Information Center
+
+**GARD** is an NIH site with expert-reviewed information about rare and genetic diseases.
+
+- Searchable by condition (use our RareInsight Search Panel)  
+- Easy explanations of inheritance and testing  
+- Lists of research and care [resources](https://rarediseases.info.nih.gov/resources)
+
+---
+
+## 5. GeneReviews: Expert Clinical Summaries
+
+**GeneReviews** contains in-depth summaries of genetic conditions written by doctors.
+
+- Useful for clinicians and advanced learners  
+- Covers inheritance, symptoms, and testing  
+- Regularly reviewed and updated
+
+---
+
+## 6. PubMed: Scientific Research Database
+
+**PubMed** is a searchable database of medical and scientific publications.
+
+- Useful for finding studies about specific genes or variants  
+- Look for review articles or case studies related to your condition
+
+> Tip: Use the gene name or disorder in the search bar to find relevant studies (e.g., “BRCA1 mutation breast cancer”).
+
+---
+
+## 7. LitVar: Scientific Literature for Variants
+
+**LitVar** connects specific genetic variants to related research articles.
+
+- Useful for tracking what's been published about a variant  
+- Shows links between variants, diseases, and studies
+
+> It is best used with a variant ID (like NM_ or rs number).
+
+---
+
+## 8. OMIM: Inheritance and Gene-Disease Relationships
+
+**OMIM** (Online Mendelian Inheritance in Man) links genes to inherited conditions.
+
+- See how a gene is related to a disease  
+- Learn about inheritance patterns and symptoms  
+- Check references to scientific literature
+
+> OMIM is a powerful tool for understanding how a gene affects health and what to expect.
+
+---
+
+## 9. Varsome: Variant Aggregator and Classifier
+
+**Varsome** brings together data from ClinVar, gnomAD, dbSNP, and more.
+
+- Gives automated variant classifications  
+- Aggregates multiple sources  
+- Suggests whether a variant is likely harmful
+
+> Varsome is helpful for combining several perspectives in one place, but final interpretation should be done by a clinical expert.
+
+---
+
+## 10. dbSNP: Variant IDs and Annotations
+
+**dbSNP** is a database of known genetic variants.
+
+- Each variant has a unique ID starting with "rs" (e.g., rs123456)  
+- Good for looking up basic information about a known SNP (single nucleotide polymorphism)
+
+> dbSNP does not tell you if a variant is harmful — it’s a registry, not a clinical tool.
+
+---
+
+## How to access these resources on RareInsight:
+
+- Go to the **Search Panel**  
+- Search for a **disorder, gene, variant, dbSNP accession, or ClinVar accession**  
+- Go to the **Diagnostic Report** panel  
+- Click on the resource you would like to access
+
+> Please note that each resource indicates which search term is required. For example, PubMed will work if you search for a gene, while NORD works if you enter a disorder.
+
+---
+
+## Final Thoughts
+
+These databases and resources provide powerful clues for interpreting genetic information. But genetics is complex, and no single resource is enough on its own.
+
+> Always consult a **genetic counselor**, **medical geneticist**, or **clinician** when interpreting genetic test results.
+
+---
+
+*This guide is for educational purposes only and does not replace professional medical advice.*

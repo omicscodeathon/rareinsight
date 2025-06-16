@@ -1,0 +1,46 @@
+---
+title: "Basic Genetics"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+
+## What is Genetics?
+
+**Genetics** is the study of how traits are passed from parents to children.  
+**Genomics** is the study of the entire genome and how it's used.
+
+![](https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2019/06/Half-plus-half-equals-you-960x640.png)
+
+---
+
+## What Makes Up Our Genome?
+
+- Your genome is made of DNA and stored in 23 pairs of chromosomes.
+- Humans have about 20,000 protein-coding genes.
+- Genes give instructions to build proteins that form and repair our bodies.
+
+![](https://rareshareprod.s3.amazonaws.com/uploads/ckeditor/pictures/51/content_Chromosomes.png)
+![](https://www.genomicseducation.hee.nhs.uk/wp-content/uploads/2018/08/DNA-double-helix_13081113544_l.jpg)
+
+---
+
+## How Do We Study the Genome?
+
+- Sequencing reads the 3 billion base pairs in your DNA.
+- A full genome sequence can produce ~200 GB of data.
+- A team of professionals interprets the results alongside clinical history.
+
+---
+
+## How Do We Get These Variants?
+
+- You inherit one gene from each parent (2 copies in total).
+- Most of your DNA is the same as others — but the small differences (variants) can matter.
+- Some variants are harmless, while others may cause disease.
+- For example, some variants give us our physical traits such as height.
+
+![](https://cdn.bluebirdbio.com/-/media/Gene_Therapy/com/1/understanding-genetic-diseases/gene-inheritance-example.png)

@@ -1,0 +1,59 @@
+---
+title: "Understanding Rare Diseases"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+
+## What Are Rare Diseases?
+
+- A rare disease affects fewer than 1 in 2,000 people.
+- Over 7,000 rare diseases exist.
+- 80% are genetic
+- 70% of rare diseases start in childhood.
+
+> While individually rare, together they affect 3.5-5.9% of people worldwide.
+> In [Africa](https://doi.org/10.1186/s13023-022-02391-w), there is a lack of reliable data on how many people are affected, but it is estimated to be around **50 million**. That's around 1 in 25 Africans!
+
+
+---
+
+## The Diagnostic Odyssey
+
+Patients often have to go through:
+- Years of unanswered questions
+- Seeing multiple specialists
+- Having countless, sometimes unnecessary, tests
+- A lack of treatment or support even after a diagnosis
+
+---
+
+## How Are Genetic Conditions Inherited?
+
+- **Single Gene Conditions** – Caused by changes in one gene  
+- **Chromosome Conditions** – Caused by missing or extra chromosomes  
+- **Multifactorial Conditions** – Involve many genes and the environment
+
+---
+
+## Types of Inheritance
+
+### Dominant
+
+- One changed gene copy is enough
+- 50% chance of passing to each child
+
+### Recessive
+
+- Two changed copies are needed
+- Parents are usually carriers
+
+### X-linked
+
+- Mutations on the X chromosome
+- Affects males more often
+
+![](https://rareshareprod.s3.amazonaws.com/uploads/ckeditor/pictures/50/content_DomRessive.png)

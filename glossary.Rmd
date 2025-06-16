@@ -1,0 +1,64 @@
+---
+title: "Glossary of Genetic Terms"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+  pdf_document:
+    toc: true
+---
+
+## Glossary
+
+[Click here for the full glossary](https://www.genomicseducation.hee.nhs.uk/glossary/)
+
+### Allele
+Variants of a gene at the same chromosome location. Some alleles affect function, like those in the BRCA1 gene.
+
+### Cell
+The basic unit of life. Contains structures like the nucleus that hold DNA.
+
+### Chromosome
+Bundles of DNA. Humans have 46 (23 pairs). Abnormalities can lead to disorders.
+
+### *De novo* variant
+De novo variants are new variants that have appeared for the first time in a patient instead of being inherited. Often they are just caused by chance.
+
+### Diagnostic Genomic Test
+A test that uses DNA to confirm or rule out a diagnosis.
+
+### Diagnostic Odyssey
+The long journey patients face before receiving a correct diagnosis.
+
+### DNA
+The molecule that carries your genetic code. Made up of four bases: A, T, C, G.
+
+### Double Helix
+The twisted-ladder shape of DNA that allows it to replicate.
+
+### Exome
+The part of the genome that codes for proteins (about 2%).
+
+### Gene
+A section of DNA that provides instructions for a protein.
+
+### Genetics
+The study of genes and inheritance.
+
+### Genome
+All the DNA in an organism, including genes and non-coding regions.
+
+### Mutation
+Any change in DNA. Some mutations may cause disease.
+
+### Next-generation Sequencing
+Fast, high-throughput methods for sequencing DNA or RNA.
+
+### Phenotype
+Your observable traits (e.g., eye colour, disease symptoms).
+
+### Sequencing
+Reading the order of DNA bases.
+
+### Variant
+A difference in the DNA sequence. Some cause disease; others do not.
