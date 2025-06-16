@@ -2,12 +2,11 @@
 From Diagnosis to Dashboard: Innovations in Rare Disease Reporting using RareInsight
 
 # Scope
-Following a successful diagnosis, rare disease patients and their families typically face substantial hurdles in accessing information and support specific to their diagnosis. There is also a growing expectation for patients and non-specialist healthcare providers to comprehend and analyse the outcomes of these genetic tests. Currently, there is no gold standard for the reporting of these outcomes and available recommendations do not take into consideration resource-limited populations where genomic literacy is a limiting factor in the accurate dissemination of genetic test results. A potential approach to reporting these results is through an interactive dashboard. While dashboards have been tested in various fields of medicine and research, their applicability has not yet been tested in the context of rare diseases. This research introduces RareInsight, an effort focused on developing an open-source, interactive dashboard tailored to both clinicians and patients. Its primary aim is to transform complex genetic variant data into simplified and understandable resources to ease the dissemination of genetic test results and encourage future research to fill in identified knowledge gaps. 
+Following a confirmed genetic diagnosis, rare disease patients and their families encounter significant challenges in accessing diagnostic information and support. Patients and non-specialists are increasingly expected to interpret and share test results; however, existing standards are primarily designed for specialists. These standards fail to address the needs of resource-limited populations where low genomic literacy hampers accurate dissemination of genetic results. This research introduces RareInsight, an open-source, interactive dashboard designed to enhance the accessibility, comprehension, and collaboration of genetic data among patients, caregivers, clinicians, and researchers. Developed using shinydashboard, RareInsight was evaluated using whole exome sequencing data from skeletal dysplasia patients. It allows users to input and view Variant Call Format (VCF) files and includes a searchable ClinVar variant table with filtering options, providing access to multiple resources based on search terms. RareInsight aims to simplify the dissemination of complex genetic information beyond the clinical setting. This dashboard serves as a pilot study demonstrating the potential of patient-centered interactive dashboards for the rare disease community. 
 
 # Workflow
 
 ![Outline of main functions of the dashboard](https://github.com/omicscodeathon/rareinsight/blob/main/figures/RI_functions.png)
-
 
 # Tutorial
 
@@ -15,7 +14,10 @@ Following a successful diagnosis, rare disease patients and their families typic
 
 # Deployment
 
-Currently, RareInsight can be deployed from RStudio using the scripts/rareinsight_01.R script. The GitHub repository can be saved and uploaded into Rstudio where users can run the App. 
+Currently, RareInsight can be deployed by:
+- Downloading the GitHub repository
+- Opening the folder in RStudio
+- Running the 01_rareinsight.R script
 
 # User input
 
