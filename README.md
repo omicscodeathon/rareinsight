@@ -95,6 +95,12 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ---
 
+##  Citation 
+
+> Coetzer, K.C., Zemzem, F., Akurut, E. et al. RareInsight simplifies the communication of genetic results for rare disease patients. Sci Rep 15, 24442 (2025). https://doi.org/10.1038/s41598-025-09744-y
+
+---
+
 ## Contact
 
 For questions, contributions, or collaborations, please open an [issue](https://github.com/omicscodeathon/rareinsight/issues) or contact the lead contributor at [Kimmiecc19](https://github.com/Kimmiecc19).
